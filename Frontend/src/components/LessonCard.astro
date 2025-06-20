@@ -1,0 +1,93 @@
+---
+import Card from "@components/Card.astro";
+import { ArrowRight, BookOpen, Clock } from "@lucide/astro";
+
+interface Props {
+  title: string;
+  description: string;
+  duration: number;
+  difficulty: "beginner" | "intermediate" | "advanced";
+}
+
+const { title, description, duration, difficulty } = Astro.props;
+
+let badgeStyle: string;
+let badgeText: string;
+
+switch (difficulty) {
+  case "beginner":
+    badgeStyle = "green";
+    badgeText = "Beginner";
+    break;
+  case "intermediate":
+    badgeStyle = "yellow";
+    badgeText = "Intermediate";
+    break;
+  case "advanced":
+    badgeStyle = "red";
+    badgeText = "Advanced";
+    break;
+}
+---
+
+<article>
+  <Card title={title} icon={BookOpen}>
+    <div class="lesson">
+      <div class="lesson-header">
+        <p class={`badge-${badgeStyle}`}>{badgeText}</p>
+        <div class="lesson-duration">
+          <Clock /> <p>{duration} min</p>
+        </div>
+      </div>
+      <p>{description}</p>
+      <button class="btn-primary btn-small">
+        Start <ArrowRight />
+      </button>
+    </div>
+  </Card>
+</article>
+
+<style>
+  .lesson {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: stretch;
+    gap: var(--space-xs);
+  }
+
+  .lesson-header {
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  .lesson-duration {
+    display: flex;
+    align-items: center;
+    font-size: var(--text-s);
+    gap: var(--space-2xs);
+  }
+
+  .lesson-duration svg {
+    width: 1.25em;
+    height: 1.25em;
+  }
+
+  .lesson > p {
+    flex: 1;
+  }
+
+  button {
+    align-self: end;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3xs);
+  }
+
+  button svg {
+    width: 1.25em;
+    height: 1.25em;
+  }
+</style>

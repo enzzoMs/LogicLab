@@ -55,3 +55,29 @@
   outline: 2px solid var(--border-color-active);
   outline-offset: 2px;
 }
+
+/* -------------------------------------------- */
+
+.badge, .badge-green, .badge-yellow, .badge-red {
+  display: inline-block;
+  font-size: var(--text-s);
+  font-weight: var(--weight-medium);
+  line-height: 1.2em;
+  background-color: var(--color-surface-secondary);
+  padding: var(--space-4xs) var(--space-2xs);
+}
+
+.badge-green {
+  color: var(--color-green-dark);
+  background-color: var(--color-green);
+}
+
+.badge-yellow {
+  color: var(--color-yellow-dark);
+  background-color: var(--color-yellow);
+}
+
+.badge-red {
+  color: var(--color-red-dark);
+  background-color: var(--color-red);
+}

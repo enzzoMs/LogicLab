@@ -1,0 +1,31 @@
+---
+import Section from "@components/Section.astro";
+import LessonCard from "@components/LessonCard.astro";
+---
+
+<Section
+  title="Learning Resources"
+  subtitle="Enhance your understanding with comprehensive tutorials and guides">
+  <div class="responsive-grid gap-m cols-1 cols-md-2">
+    <LessonCard
+      title="Introduction to Boolean Algebra"
+      description="Learn the fundamentals of Boolean Algebra, basic operators, and truth values."
+      difficulty="beginner"
+      duration={15}/>
+    <LessonCard
+      title="Logical Operators: AND, OR, NOT"
+      description="Master the three fundamental logical operators and their properties."
+      difficulty="beginner"
+      duration={20}/>
+    <LessonCard
+      title="De Morgan's Laws"
+      description="Understand and apply De Morgan's Laws for expression transformation."
+      difficulty="intermediate"
+      duration={25}/>
+    <LessonCard
+      title="Karnaugh Maps"
+      description="Learn a visual method for simplifying boolean expression using K-Maps."
+      difficulty="advanced"
+      duration={35}/>
+  </div>
+</Section>
