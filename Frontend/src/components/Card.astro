@@ -3,7 +3,7 @@ import { type Icon as IconType } from "@lucide/astro";
 
 interface Props {
   title: string;
-  icon: typeof IconType;
+  icon?: typeof IconType;
   linkUrl?: string;
   style?: "horizontal" | "vertical";
 }
@@ -17,7 +17,7 @@ const { title, linkUrl, style = "horizontal" } = props;
     <a href={linkUrl}>
       <div class={style === "horizontal" ? "horizontal-card" : "vertical-card"}>
         <div class="card-header">
-          <props.icon />
+          {props.icon && <props.icon />}
           <h3>{title}</h3>
         </div>
         <slot />
@@ -26,7 +26,7 @@ const { title, linkUrl, style = "horizontal" } = props;
   ) : (
     <div class={style === "horizontal" ? "horizontal-card" : "vertical-card"}>
       <div class="card-header">
-        <props.icon />
+        {props.icon && <props.icon />}
         <h3>{title}</h3>
       </div>
       <slot />

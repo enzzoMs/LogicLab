@@ -1,0 +1,35 @@
+---
+import Card from "@components/Card.astro";
+---
+
+<Card title="Quick Start Guide">
+  <div class="start-guide">
+    <div class="guide-step">1</div> Start with basic Boolean concepts
+    <div class="guide-step">2</div> Practice with the expression editor
+    <div class="guide-step">3</div> Generate truth tables automatically
+    <div class="guide-step">4</div> Test knowledge with quizzes
+  </div>
+  <button class="btn-primary btn-small">Start Learning Now</button>
+</Card>
+
+<style>
+  .start-guide {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: var(--space-xs);
+    margin: var(--space-s) 0;
+  }
+
+  .guide-step {
+    text-align: center;
+    font-size: var(--text-s);
+    font-weight: var(--weight-semibold);
+    background-color: var(--color-primary-light);
+    padding: var(--space-4xs) var(--space-xs);
+  }
+
+  button {
+    width: 100%;
+  }
+</style>
