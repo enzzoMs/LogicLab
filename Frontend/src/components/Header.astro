@@ -1,0 +1,76 @@
+---
+import appLogo from "@assets/icons/app-logo.svg?url";
+---
+
+<header>
+  <img class="app-logo" src={appLogo} alt="App Logo" />
+  <h1 class="app-title">LogicLab</h1>
+  <nav>
+    <a href="/">Home</a>
+    <a href="/">Editor</a>
+    <a href="/">Truth Tables</a>
+    <a href="/">K-Maps</a>
+    <a href="/">Lessons</a>
+    <a href="/">Quizzes</a>
+  </nav>
+  <div class="btns-container">
+    <button class="btn-outline btn-small">Take Quiz</button>
+    <button class="btn-primary btn-small">Get Started</button>
+  </div>
+</header>
+
+<style>
+  header {
+    width: 100%;
+    position: sticky;
+    top: 0;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    background-color: var(--color-surface-primary);
+    border-bottom: var(--border-thickness) solid var(--border-color);
+    padding: var(--space-s) var(--space-xl);
+  }
+
+  .app-title {
+    flex: 1;
+    color: var(--color-text-title);
+    font-size: var(--text-xl);
+    font-weight: var(--weight-bold);
+    margin: 0;
+  }
+
+  .app-logo {
+    height: calc(var(--text-s) * 3);
+    width: calc(var(--text-s) * 3);
+  }
+
+  nav {
+    flex: 2;
+    display: flex;
+    align-items: end;
+    gap: var(--space-l);
+    font-weight: var(--weight-medium);
+  }
+
+  nav a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  nav a:hover {
+    color: var(--color-text-title);
+  }
+
+  nav a.active-link {
+    color: var(--color-primary);
+  }
+
+  .btns-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--space-xs);
+  }
+</style>

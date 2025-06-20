@@ -1,0 +1,57 @@
+.btn-primary,
+.btn-outline {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: var(--space-xs) var(--space-m);
+  box-shadow: 0 2px 8px #0000001a;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-medium {
+  font-size: var(--text-m);
+  padding: var(--space-xs) var(--space-m);
+}
+
+.btn-small {
+  font-size: var(--text-s);
+  padding: var(--space-2xs) var(--space-s);
+}
+
+/* -------------------------------------------- */
+
+.btn-primary {
+  color: var(--color-on-primary);
+  background-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.btn-primary:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------- */
+
+.btn-outline {
+  color: var(--btn-outline-text-color);
+  background-color: transparent;
+  border: var(--border-thickness) solid var(--border-color);
+  box-shadow: none;
+}
+
+.btn-outline:hover {
+  background-color: var(--btn-outline-bg-focused);
+  border-color: var(--border-color-active);
+}
+
+.btn-outline:focus {
+  outline: 2px solid var(--border-color-active);
+  outline-offset: 2px;
+}

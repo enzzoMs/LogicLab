@@ -1,5 +1,12 @@
 ---
-const a = 1;
+import Header from "../components/Header.astro";
+import appLogo from "@assets/icons/app-logo.svg?url";
+
+interface Props {
+  pageTitle: string;
+}
+
+const { pageTitle } = Astro.props;
 ---
 
 <!doctype html>
@@ -7,11 +14,13 @@ const a = 1;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={appLogo} />
+    <link rel="stylesheet" href="/src/assets/styles/styles.css" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>{`${pageTitle} - LogicLab`}</title>
   </head>
   <body>
+    <Header />
     <slot />
   </body>
 </html>
