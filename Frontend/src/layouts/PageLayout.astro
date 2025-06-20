@@ -1,5 +1,6 @@
 ---
-import Header from "../components/Header.astro";
+import Header from "@components/Header.astro";
+import Footer from "@components/Footer.astro";
 import appLogo from "@assets/icons/app-logo.svg?url";
 
 interface Props {
@@ -17,6 +18,7 @@ const { pageTitle } = Astro.props;
     <link rel="icon" type="image/svg+xml" href={appLogo} />
     <link rel="stylesheet" href="/src/assets/styles/styles.css" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="description" content=" A interactive platform for learning and experimenting with boolean expressions, truth tables and logical reasoning.">
     <title>{`${pageTitle} - LogicLab`}</title>
   </head>
   <body>
@@ -24,5 +26,6 @@ const { pageTitle } = Astro.props;
     <main>
       <slot />
     </main>
+    <Footer />
   </body>
 </html>
