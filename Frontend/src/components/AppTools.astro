@@ -1,0 +1,25 @@
+---
+import Section from "@components/Section.astro";
+import Card from "./Card.astro";
+import { Calculator, Table, BookOpen, Brain } from "@lucide/astro";
+---
+
+<Section
+  title="Powerful Tools"
+  subtitle="Everything you need to understand and master Boolean algebra concepts through interactive learning."
+>
+  <div class="responsive-grid gap-m cols-1 cols-md-2 cols-lg-4">
+    <Card title="Expression Editor" icon={Calculator} style={"vertical"} linkUrl="/">
+      <p>Create and edit Boolean expressions with our intuitive visual editor.</p>
+    </Card>
+    <Card title="Truth Tables" icon={Table} style={"vertical"} linkUrl="/">
+      <p>Create and edit Boolean expressions with our intuitive visual editor.</p>
+    </Card>
+    <Card title="Interactive Lessons" icon={BookOpen} style={"vertical"} linkUrl="/">
+      <p>Learn Boolean algebra through step-by-step guided lessons.</p>
+    </Card>
+    <Card title="Practice Quizzes" icon={Brain} style={"vertical"} linkUrl="/">
+      <p>Test your knowledge with interactive quizzes and exercises.</p>
+    </Card>
+  </div>
+</Section>
