@@ -3,15 +3,16 @@ import appLogo from "@assets/icons/app-logo.svg?url";
 ---
 
 <header>
-  <img class="app-logo" src={appLogo} alt="App Logo" />
-  <h1 class="app-title">LogicLab</h1>
+  <div class="app-logo-wrapper">
+    <img class="app-logo" src={appLogo} alt="App Logo" />
+    <h1 class="app-title">LogicLab</h1>
+  </div>
   <nav>
     <a href="/">Home</a>
-    <a href="/">Editor</a>
-    <a href="/">Truth Tables</a>
-    <a href="/">K-Maps</a>
+    <a href="/editor">Editor</a>
     <a href="/">Lessons</a>
     <a href="/">Quizzes</a>
+    <a href="/">About</a>
   </nav>
   <div class="btns-container">
     <button class="btn-outline btn-small">Take Quiz</button>
@@ -32,8 +33,15 @@ import appLogo from "@assets/icons/app-logo.svg?url";
     padding: var(--space-s) var(--space-xl);
   }
 
-  .app-title {
+  .app-logo-wrapper {
     flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: var(--space-xs);
+  }
+
+  .app-title {
     color: var(--color-text-title);
     font-size: var(--text-xl);
     font-weight: var(--weight-bold);
@@ -48,7 +56,8 @@ import appLogo from "@assets/icons/app-logo.svg?url";
   nav {
     flex: 2;
     display: flex;
-    align-items: end;
+    align-items: center;
+    justify-content: center;
     gap: var(--space-l);
     font-weight: var(--weight-medium);
   }

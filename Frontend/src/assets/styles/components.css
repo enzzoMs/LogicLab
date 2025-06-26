@@ -1,5 +1,6 @@
 .btn-primary,
-.btn-outline {
+.btn-outline,
+.btn-secondary {
   font-family: inherit;
   font-size: inherit;
   font-weight: var(--weight-medium);
@@ -52,7 +53,23 @@
 }
 
 .btn-outline:focus {
-  outline: 2px solid var(--border-color-active);
+  outline: 2px solid var(--border-color);
+  outline-offset: 2px;
+}
+
+/* -------------------------------------------- */
+
+.btn-secondary {
+  color: var(--color-text-title);
+  background-color: var(--btn-secondary-bg);
+}
+
+.btn-secondary:hover {
+  background-color: var(--btn-secondary-bg-focused);
+}
+
+.btn-secondary:focus {
+  outline: 2px solid var(--btn-secondary-bg-focused);
   outline-offset: 2px;
 }
 

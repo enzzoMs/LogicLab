@@ -1,0 +1,27 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import ExpressionEditor from "@components/editor/ExpressionEditor";
+---
+
+<PageLayout pageTitle="Expression Editor">
+  <section>
+      <h3>Boolean Expression Editor</h3>
+      <p>Build, evaluate and simplify boolean expressions using logical operators and variables</p>
+      <ExpressionEditor client:load/>
+  </section>
+</PageLayout>
+
+<style>
+  section {
+    padding: var(--space-l) var(--space-2xl);
+  }
+
+  h3 {
+    font-size: var(--text-xl);
+  }
+
+  p {
+    font-size: var(--text-m);
+    margin-bottom: var(--space-m);
+  }
+</style>

@@ -1,5 +1,5 @@
 ---
-import Card from "@components/Card.astro";
+import Card from "@components/shared/Card.astro";
 import { ArrowRight, BookOpen, Clock } from "@lucide/astro";
 
 interface Props {
@@ -48,6 +48,10 @@ switch (difficulty) {
 </article>
 
 <style>
+  article {
+    height: 100%;
+  }
+
   .lesson {
     flex: 1;
     display: flex;

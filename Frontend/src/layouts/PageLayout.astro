@@ -1,6 +1,6 @@
 ---
-import Header from "@components/Header.astro";
-import Footer from "@components/Footer.astro";
+import Header from "@components/shared/Header.astro";
+import Footer from "@components/shared/Footer.astro";
 import appLogo from "@assets/icons/app-logo.svg?url";
 
 interface Props {
@@ -29,3 +29,15 @@ const { pageTitle } = Astro.props;
     <Footer />
   </body>
 </html>
+
+<style>
+  body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1;
+  }
+</style>

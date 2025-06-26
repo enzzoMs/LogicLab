@@ -39,6 +39,7 @@ body {
 
   --color-text-title: #111827;
   --color-text-body: #4b5563;
+  --color-text-body-rgb: 75, 85, 99;
 
   --color-green: #dcfce7;
   --color-green-dark: #166534;
@@ -51,46 +52,14 @@ body {
 
   /* TEXT ========== */
 
-  --text-xs: clamp(
-    0.74em,
-    calc(0.04vw + 0.73em),
-    0.76em
-  ); /* min: 11.84px, max: 12.16px */
-  --text-s: clamp(
-    0.83em,
-    calc(0.14vw + 0.81em),
-    0.93em
-  ); /* min: 13.28px, max: 14.88px */
-  --text-m: clamp(
-    0.94em,
-    calc(0.28vw + 0.88em),
-    1.13em
-  ); /* min: 15.04px, max: 18.08px */
-  --text-l: clamp(
-    1.05em,
-    calc(0.46vw + 0.96em),
-    1.25em
-  ); /* min: 16.8px,  max: 20px */
-  --text-xl: clamp(
-    1.27em,
-    calc(0.58vw + 1.15em),
-    1.66em
-  ); /* min: 20.32px, max: 26.56px */
-  --text-2xl: clamp(
-    1.42em,
-    calc(0.87vw + 1.25em),
-    2.01em
-  ); /* min: 22.72px, max: 32.16px */
-  --text-3xl: clamp(
-    1.6em,
-    calc(1.24vw + 1.35em),
-    2.44em
-  ); /* min: 25.6px,  max: 39.04px */
-  --text-4xl: clamp(
-    1.8em,
-    calc(1.71vw + 1.46em),
-    2.95em
-  ); /* min: 28.8px,  max: 47.2px */
+  --text-xs: clamp(0.74em, calc(0.04vw + 0.73em), 0.76em); /* min: 11.84px, max: 12.16px */
+  --text-s: clamp(0.83em, calc(0.14vw + 0.81em), 0.93em); /* min: 13.28px, max: 14.88px */
+  --text-m: clamp(0.94em, calc(0.28vw + 0.88em), 1.13em); /* min: 15.04px, max: 18.08px */
+  --text-l: clamp(1.05em, calc(0.46vw + 0.96em), 1.25em); /* min: 16.8px,  max: 20px */
+  --text-xl: clamp(1.27em, calc(0.58vw + 1.15em), 1.66em); /* min: 20.32px, max: 26.56px */
+  --text-2xl: clamp(1.42em, calc(0.87vw + 1.25em), 2.01em); /* min: 22.72px, max: 32.16px */
+  --text-3xl: clamp(1.6em, calc(1.24vw + 1.35em), 2.44em); /* min: 25.6px,  max: 39.04px */
+  --text-4xl: clamp(1.8em, calc(1.71vw + 1.46em), 2.95em); /* min: 28.8px,  max: 47.2px */
 
   /* FONT WEIGHT ========== */
 
@@ -101,61 +70,17 @@ body {
 
   /* SPACING ========== */
 
-  --space-4xs: clamp(
-    0.33em,
-    calc(-0.03vw + 0.33em),
-    0.31em
-  ); /* min: 5.28px, max: 4.96px */
-  --space-3xs: clamp(
-    0.41em,
-    calc(0.04vw + 0.4em),
-    0.44em
-  ); /* min: 6.56px, max: 7.04px */
-  --space-2xs: clamp(
-    0.51em,
-    calc(0.16vw + 0.48em),
-    0.62em
-  ); /* min: 8.16px, max: 9.92px */
-  --space-xs: clamp(
-    0.64em,
-    calc(0.35vw + 0.57em),
-    0.88em
-  ); /* min: 10.24px, max: 14.08px */
-  --space-s: clamp(
-    0.8em,
-    calc(0.65vw + 0.67em),
-    1.24em
-  ); /* min: 12.8px,  max: 19.84px */
-  --space-m: clamp(
-    1em,
-    calc(1.11vw + 0.78em),
-    1.75em
-  ); /* min: 16px,    max: 28px */
-  --space-l: clamp(
-    1.25em,
-    calc(1.81vw + 0.89em),
-    2.47em
-  ); /* min: 20px,    max: 39.52px */
-  --space-xl: clamp(
-    1.56em,
-    calc(2.87vw + 0.99em),
-    3.5em
-  ); /* min: 24.96px, max: 56px */
-  --space-2xl: clamp(
-    1.95em,
-    calc(4.44vw + 1.07em),
-    4.95em
-  ); /* min: 31.2px,  max: 79.2px */
-  --space-3xl: clamp(
-    2.44em,
-    calc(6.75vw + 1.09em),
-    7em
-  ); /* min: 39.04px, max: 112px */
-  --space-4xl: clamp(
-    3.05em,
-    calc(10.13vw + 1.02em),
-    9.89em
-  ); /* min: 48.8px,  max: 158.24px */
+  --space-4xs: clamp(0.33em, calc(-0.03vw + 0.33em), 0.31em); /* min: 5.28px, max: 4.96px */
+  --space-3xs: clamp(0.41em, calc(0.04vw + 0.4em), 0.44em); /* min: 6.56px, max: 7.04px */
+  --space-2xs: clamp(0.51em, calc(0.16vw + 0.48em), 0.62em); /* min: 8.16px, max: 9.92px */
+  --space-xs: clamp(0.64em, calc(0.35vw + 0.57em), 0.88em); /* min: 10.24px, max: 14.08px */
+  --space-s: clamp(0.8em, calc(0.65vw + 0.67em), 1.24em); /* min: 12.8px,  max: 19.84px */
+  --space-m: clamp(1em, calc(1.11vw + 0.78em), 1.75em); /* min: 16px,    max: 28px */
+  --space-l: clamp(1.25em, calc(1.81vw + 0.89em), 2.47em); /* min: 20px,    max: 39.52px */
+  --space-xl: clamp(1.56em, calc(2.87vw + 0.99em), 3.5em); /* min: 24.96px, max: 56px */
+  --space-2xl: clamp(1.95em, calc(4.44vw + 1.07em), 4.95em); /* min: 31.2px,  max: 79.2px */
+  --space-3xl: clamp(2.44em, calc(6.75vw + 1.09em), 7em); /* min: 39.04px, max: 112px */
+  --space-4xl: clamp(3.05em, calc(10.13vw + 1.02em), 9.89em); /* min: 48.8px,  max: 158.24px */
 
   /* BORDERS ========== */
 
@@ -168,6 +93,9 @@ body {
 
   --btn-outline-text-color: #374151;
   --btn-outline-bg-focused: #f9fafb;
+
+  --btn-secondary-bg: #e5e7eb;
+  --btn-secondary-bg-focused: #d1d5db;
 }
 
 /* FONTS ========== */
