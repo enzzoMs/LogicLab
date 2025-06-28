@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {RotateCcw, Trash2} from "lucide-react";
+import {Play, RotateCcw, Trash2} from "lucide-react";
 import styles from "./ExpressionEditor.module.css";
 
 interface Token {
@@ -51,6 +51,9 @@ export default function ExpressionEditor() {
         }/>
 
       <div className={styles.editorButtons}>
+        <button className="btn-primary">
+          <Play /> Evaluate
+        </button>
         <button className="btn-outline" onClick={() => setExpTokens([...expTokens.slice(0, -1)])}>
           <RotateCcw /> Undo
         </button>
