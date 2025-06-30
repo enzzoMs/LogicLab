@@ -1,0 +1,13 @@
+.groupTitle {
+  color: var(--color-text-body);
+  font-size: var(--text-s);
+  font-weight: var(--weight-medium);
+  margin-bottom: var(--space-xs);
+}
+
+.groupContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-s);
+}

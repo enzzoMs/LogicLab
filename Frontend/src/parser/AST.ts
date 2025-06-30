@@ -1,6 +1,6 @@
 export type BooleanToken = Variable | BinaryOperator | UnaryOperator | Parentheses | Literal;
 
-export type BinaryOperator = "OR" | "NAND" | "XOR" | "AND";
+export type BinaryOperator = "OR" | "NAND" | "XOR" | "AND" | "NOR";
 export type UnaryOperator = "NOT";
 export type Variable = "A" | "B" | "C" | "D" | "E" | "F";
 export type Parentheses = "(" | ")";

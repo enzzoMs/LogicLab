@@ -37,6 +37,8 @@ body {
   --color-surface-primary: #ffffff;
   --color-surface-secondary: #f3f4f6;
 
+  --color-danger: #ef4444;
+
   --color-text-title: #111827;
   --color-text-body: #4b5563;
   --color-text-body-rgb: 75, 85, 99;

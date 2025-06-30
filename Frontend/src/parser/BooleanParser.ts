@@ -2,10 +2,11 @@
 Grammar for Boolean expressions:
 
 <bool-expression> ::= <or_exp>
-<or_exp> ::= <nand_exp> ("OR" <nand_exp>)*
-<nand_exp> ::= <xor_exp> ("NAND" <xor_exp>)*
-<xor_exp> ::= <and_exp> ("XOR" <and_exp>)*
-<and_exp> ::= <not_exp> ("AND" <not_exp>)*
+<or_exp> ::= <xor_exp> ("OR" <xor_exp>)*
+<xor_exp> ::= <nor_exp> ("XOR" <nor_exp>)*
+<nor_exp> ::= <and_exp> ("NOR" <and_exp>)*
+<and_exp> ::= <nand_exp> ("AND" <nand_exp>)*
+<nand_exp> ::= <not_exp> ("NAND" <not_exp>)*
 <not_exp> ::= "NOT" <primary> | <primary>
 <primary> ::= "TRUE" | "FALSE" | "(" <bool-expression> ")" | <variable>
 <variable> ::= "A" | "B" | "C" | "D" | "E" | "F"
@@ -15,12 +16,13 @@ order of precedence below (from highest to lowest):
 
 * PARENTHESES
 * NOT
-* AND
-* XOR
 * NAND
+* AND
+* NOR
+* XOR
 * OR
 */
-import type {AST, ASTNode, BooleanToken, Variable} from "./AST.ts";
+import type {AST, ASTNode, BooleanToken, Variable} from "@parser/AST.ts";
 
 export class ParsingError extends Error {
   tokenIndex: number;
@@ -65,41 +67,51 @@ export class BooleanParser {
   }
 
   private parseOrExpression(): ASTNode {
-    let leftExp = this.parseNandExpression();
+    let leftExp = this.parseXorExpression();
 
     while (this.tryMatch("OR")) {
-      const rightExp = this.parseNandExpression();
+      const rightExp = this.parseXorExpression();
       leftExp = { type: "Binary", left: leftExp, operator: "OR", right: rightExp };
     }
     return leftExp;
   }
 
-  private parseNandExpression(): ASTNode {
-    let leftExp = this.parseXorExpression();
-
-    while (this.tryMatch("NAND")) {
-      const rightExp = this.parseXorExpression();
-      leftExp = { type: "Binary", left: leftExp, operator: "NAND", right: rightExp };
-    }
-    return leftExp;
-  }
-
   private parseXorExpression(): ASTNode {
-    let leftExp = this.parseAndExpression();
+    let leftExp = this.parseNorExpression();
 
     while (this.tryMatch("XOR")) {
-      const rightExp = this.parseAndExpression();
+      const rightExp = this.parseNorExpression();
       leftExp = { type: "Binary", left: leftExp, operator: "XOR", right: rightExp };
     }
     return leftExp;
   }
 
+  private parseNorExpression(): ASTNode {
+    let leftExp = this.parseAndExpression();
+
+    while (this.tryMatch("NOR")) {
+      const rightExp = this.parseAndExpression();
+      leftExp = { type: "Binary", left: leftExp, operator: "NOR", right: rightExp };
+    }
+    return leftExp;
+  }
+
   private parseAndExpression(): ASTNode {
-    let leftExp = this.parseNotExpression();
+    let leftExp = this.parseNandExpression();
 
     while (this.tryMatch("AND")) {
-      const rightExp = this.parseNotExpression();
+      const rightExp = this.parseNandExpression();
       leftExp = { type: "Binary", left: leftExp, operator: "AND", right: rightExp };
+    }
+    return leftExp;
+  }
+
+  private parseNandExpression(): ASTNode {
+    let leftExp = this.parseNotExpression();
+
+    while (this.tryMatch("NAND")) {
+      const rightExp = this.parseNotExpression();
+      leftExp = { type: "Binary", left: leftExp, operator: "NAND", right: rightExp };
     }
     return leftExp;
   }
