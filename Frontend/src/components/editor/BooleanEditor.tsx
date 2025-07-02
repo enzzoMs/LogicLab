@@ -1,69 +1,73 @@
-import { useState} from "react";
+import {useReducer} from "react";
 import {Play, RotateCcw, Trash2} from "lucide-react";
 import type {BooleanToken} from "@parser/AST";
-import {BooleanParser} from "@parser/BooleanParser";
-import {ParsingError} from "@parser/BooleanParser";
-import TokenGroup from "@components/editor/TokenGroup";
-import ExpressionContainer from "@components/editor/ExpressionContainer";
+import expressionReducer, {type ExpressionState} from "@components/editor/ExpressionReducer";
+import TokenGroup from "@components/editor/tokens/TokenGroup";
+import ExpressionContainer from "@components/editor/expression/ExpressionContainer";
+import ExpressionContext, {type VariableContext} from "@components/editor/expression/ExpressionContext";
 import styles from "@components/editor/BooleanEditor.module.css";
 
-const booleanParser = new BooleanParser();
+const initialExpState: ExpressionState = {
+  tokens: [],
+  context: {
+    "A": null, "B": null,
+    "C": null, "D": null,
+    "E": null, "F": null
+  },
+  errorMsg: null
+}
 
 export default function BooleanEditor() {
-  const [expTokens, setExpTokens] = useState<BooleanToken[]>([]);
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [expression, dispatch] = useReducer(expressionReducer, initialExpState);
 
-  const addToken = (token: BooleanToken) => {
-    setExpTokens([...expTokens, token]);
-    setErrorMsg(null);
-  }
-
-  const replaceTokens = (tokens: BooleanToken[]) => {
-    setExpTokens(tokens);
-    setErrorMsg(null);
-  }
-
-  const evaluateExpression = () => {
-    try {
-      booleanParser.parse(expTokens);
-      setErrorMsg(null);
-    } catch (e) {
-      if (e instanceof ParsingError) {
-        setErrorMsg(`[ERROR] - ${e.message} at position ${e.tokenIndex + 1}.`);
-      } else {
-        throw e;
-      }
-    }
-  }
+  const addToken = (token: BooleanToken) => dispatch({ type: "ADD_TOKEN", token });
 
   return (
     <div className={styles.editorContainer}>
-      <ExpressionContainer tokens={expTokens} errorMsg={errorMsg} />
+      <ExpressionContainer tokens={expression.tokens} errorMsg={expression.errorMsg} />
 
       <TokenGroup
-        group="Variables"
+        groupName="Variables"
         tokens={["A", "B", "C", "D", "E", "F"]}
-        onTokenClicked={addToken}/>
+        tokenStyle="outline"
+        onTokenClicked={addToken} />
       <TokenGroup
-        group="Operators"
+        groupName="Operators"
         tokens={["AND", "OR", "NOT", "XOR", "NAND", "NOR"]}
-        onTokenClicked={addToken}/>
+        tokenStyle="secondary"
+        onTokenClicked={addToken} />
       <TokenGroup
-        group="Parentheses"
+        groupName="Parentheses"
         tokens={["(", ")"]}
-        onTokenClicked={addToken}/>
+        tokenStyle="outline"
+        onTokenClicked={addToken} />
+
+      {expressionHasVariables(expression.context) && (
+        <ExpressionContext
+          context={expression.context}
+          onToggleVariable={(variable) => dispatch({ type: "TOGGLE_VARIABLE_VALUE", variable })}/>
+      )}
 
       <div className={styles.editorButtons}>
-        <button className="btn-primary" onClick={evaluateExpression}>
+        <button className="btn-primary" onClick={() => dispatch({ type: "EVALUATE" })}>
           <Play /> Evaluate
         </button>
-        <button className="btn-outline" onClick={() => replaceTokens([...expTokens.slice(0, -1)])}>
+        <button className="btn-outline" onClick={() => dispatch({ type: "UNDO" })}>
           <RotateCcw /> Undo
         </button>
-        <button className="btn-outline" onClick={() => replaceTokens([])}>
+        <button className="btn-outline" onClick={() => dispatch({ type: "CLEAR" })}>
           <Trash2 /> Clear
         </button>
       </div>
     </div>
   )
+}
+
+function expressionHasVariables(context: VariableContext) {
+  for (const variable in context) {
+    if (context[variable as keyof VariableContext] !== null) {
+      return true;
+    }
+  }
+  return false;
 }

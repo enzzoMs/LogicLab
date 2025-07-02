@@ -1,20 +1,21 @@
-import type {BooleanToken} from "../../parser/AST";
-import styles from "./TokenGroup.module.css";
+import type {BooleanToken} from "@parser/AST";
+import styles from "@components/editor/tokens/TokenGroup.module.css";
 
 interface TokenGroupProps {
-  group: "Variables" | "Operators" | "Parentheses";
+  groupName: string;
   tokens: BooleanToken[];
   onTokenClicked: (token: BooleanToken) => void;
+  tokenStyle: "outline" | "secondary";
 }
-export default function TokenGroup({ group, tokens, onTokenClicked }: TokenGroupProps) {
+export default function TokenGroup({ groupName, tokens, onTokenClicked, tokenStyle }: TokenGroupProps) {
   return (
     <>
-      <h4 className={styles.groupTitle}>{group}</h4>
+      <h4 className={styles.groupTitle}>{groupName}</h4>
       <div className={styles.groupContainer}>
         {tokens.map((token, index) => (
           <button
             key={`${index}-${token}`}
-            className={group === "Operators" ? "btn-secondary btn-small" : "btn-outline btn-small"}
+            className={`btn-${tokenStyle} btn-small`}
             onClick={() => onTokenClicked(token)}>
             {token}
           </button>

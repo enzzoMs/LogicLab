@@ -1,5 +1,5 @@
 import type {BooleanToken} from "@parser/AST";
-import styles from "@components/editor/ExpressionContainer.module.css";
+import styles from "@components/editor/expression/ExpressionContainer.module.css";
 
 interface ExpressionContainerProps {
   tokens: BooleanToken[];

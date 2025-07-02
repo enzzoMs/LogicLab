@@ -21,6 +21,7 @@ describe("BooleanParser", () => {
     ["A", { type: "Variable", value: "A" }],
     ["NOT A", { type: "Unary", operator: "NOT", innerNode: { type: "Variable", value: "A" } }],
     ["A AND B", { type: "Binary", left: { type: "Variable", value: "A" }, operator: "AND", right: { type: "Variable", value: "B" } }],
+    ["A NOR B", { type: "Binary", left: { type: "Variable", value: "A" }, operator: "NOR", right: { type: "Variable", value: "B" } }],
     ["A OR B", { type: "Binary", left: { type: "Variable", value: "A" }, operator: "OR", right: { type: "Variable", value: "B" } }],
     ["A XOR B", { type: "Binary", left: { type: "Variable", value: "A" }, operator: "XOR", right: { type: "Variable", value: "B" } }],
     ["A NAND B", { type: "Binary", left: { type: "Variable", value: "A" }, operator: "NAND", right: { type: "Variable", value: "B" } }],
