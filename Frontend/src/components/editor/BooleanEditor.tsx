@@ -1,10 +1,11 @@
 import {useReducer} from "react";
 import {Play, RotateCcw, Trash2} from "lucide-react";
-import type {BooleanToken} from "@parser/AST";
+import type {BooleanToken} from "@engine/parser/AST";
 import expressionReducer, {type ExpressionState} from "@components/editor/ExpressionReducer";
 import TokenGroup from "@components/editor/tokens/TokenGroup";
 import ExpressionContainer from "@components/editor/expression/ExpressionContainer";
-import ExpressionContext, {type VariableContext} from "@components/editor/expression/ExpressionContext";
+import ExpressionContext from "@components/editor/expression/ExpressionContext";
+import type {VariableContext} from "@engine/evaluator/BooleanEvaluator";
 import styles from "@components/editor/BooleanEditor.module.css";
 
 const initialExpState: ExpressionState = {
@@ -14,7 +15,8 @@ const initialExpState: ExpressionState = {
     "C": null, "D": null,
     "E": null, "F": null
   },
-  errorMsg: null
+  errorMsg: null,
+  result: null
 }
 
 export default function BooleanEditor() {
@@ -59,6 +61,10 @@ export default function BooleanEditor() {
           <Trash2 /> Clear
         </button>
       </div>
+
+      {expression.result !== null && (
+        <p>Resultado: {expression.result ? "True" : "False"}</p>
+      )}
     </div>
   )
 }

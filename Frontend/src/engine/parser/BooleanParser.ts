@@ -22,7 +22,7 @@ order of precedence below (from highest to lowest):
 * XOR
 * OR
 */
-import type {AST, ASTNode, BooleanToken, Variable} from "@parser/AST.ts";
+import type {AST, ASTNode, BooleanToken, Variable} from "@engine/parser/AST.ts";
 
 export class ParsingError extends Error {
   tokenIndex: number;

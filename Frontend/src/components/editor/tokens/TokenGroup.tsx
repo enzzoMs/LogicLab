@@ -1,4 +1,4 @@
-import type {BooleanToken} from "@parser/AST";
+import type {BooleanToken} from "@engine/parser/AST";
 import styles from "@components/editor/tokens/TokenGroup.module.css";
 
 interface TokenGroupProps {

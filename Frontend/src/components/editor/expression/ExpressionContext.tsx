@@ -1,7 +1,6 @@
-import type {Variable} from "@parser/AST";
+import type {Variable} from "@engine/parser/AST.ts";
+import type { VariableContext } from "@engine/evaluator/BooleanEvaluator";
 import styles from "@components/editor/expression/ExpressionContext.module.css";
-
-export type VariableContext = Record<Variable, boolean | null>;
 
 interface ExpressionContextProps {
   context: VariableContext;
