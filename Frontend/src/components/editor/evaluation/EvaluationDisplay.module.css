@@ -1,0 +1,77 @@
+.evaluationContainer {
+  width: 800px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface-primary);
+  padding: var(--space-m) var(--space-l);
+  box-shadow: 0 2px 8px #0000001a;
+}
+
+.evaluationHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2xs);
+  border-bottom: var(--border-thickness) solid var(--border-color);
+  padding-bottom: var(--space-xs);
+}
+
+.evaluationHeader h2 {
+  flex: 1;
+  font-size: var(--text-l);
+  font-weight: var(--weight-semibold);
+  margin-bottom: 0;
+}
+
+.evaluationHeader input[type="checkbox"] {
+  cursor: pointer;
+  accent-color: var(--color-primary);
+}
+
+.evaluationHeader label {
+  cursor: pointer;
+}
+
+.stepsList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  border-bottom: var(--border-thickness) solid var(--border-color);
+  padding-bottom: var(--space-m);
+  margin-top: var(--space-m);
+}
+
+.stepContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2xs);
+  font-size: var(--text-s);
+  font-weight: var(--weight-semibold);
+  color: var(--color-primary);
+  padding-left: var(--space-xs);
+  border-left: 3px solid var(--color-primary);
+}
+
+.step {
+  color: var(--color-text-title);
+  font-weight: var(--weight-regular);
+  background-color: var(--color-surface-secondary);
+  padding: var(--space-2xs) var(--space-xs);
+  border: var(--border-thickness) solid var(--border-color);
+}
+
+.trueResult, .falseResult {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-semibold);
+  text-align: center;
+  text-transform: uppercase;
+  margin-top: var(--space-s);
+}
+
+.trueResult {
+  color: var(--color-success);
+}
+
+.falseResult {
+  color: var(--color-danger);
+}

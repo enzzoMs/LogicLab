@@ -10,7 +10,7 @@ interface TokenGroupProps {
 export default function TokenGroup({ groupName, tokens, onTokenClicked, tokenStyle }: TokenGroupProps) {
   return (
     <>
-      <h4 className={styles.groupTitle}>{groupName}</h4>
+      <h2 className={styles.groupTitle}>{groupName}</h2>
       <div className={styles.groupContainer}>
         {tokens.map((token, index) => (
           <button

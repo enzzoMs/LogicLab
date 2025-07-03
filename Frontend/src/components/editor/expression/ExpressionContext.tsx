@@ -10,7 +10,7 @@ interface ExpressionContextProps {
 export default function ExpressionContext({ context, onToggleVariable }: ExpressionContextProps) {
   return (
     <>
-      <h4 className={styles.title}>Variable Values</h4>
+      <h2 className={styles.title}>Variable Values</h2>
       <div className={styles.variableContainer}>
         {Object.entries(context).map(([variable, value]) => (
           (value !== null) && (

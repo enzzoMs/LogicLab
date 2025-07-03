@@ -14,7 +14,7 @@ export interface ExpressionState {
   tokens: BooleanToken[];
   context: VariableContext;
   errorMsg: string | null;
-  result: boolean | null;
+  evaluationSteps: string[] | null;
 }
 
 const booleanEngine = new BooleanEngine();
@@ -32,17 +32,17 @@ export default function expressionReducer(state: ExpressionState, action: Expres
         tokens: [...state.tokens, newToken],
         context: newContext,
         errorMsg: null,
-        result: null
+        evaluationSteps: null
       };
     }
     case "EVALUATE":
       try {
         booleanEngine.parse(state.tokens);
-        const result = booleanEngine.evaluate(state.context);
+        const evaluationSteps = booleanEngine.evaluate(state.context);
         return {
           ...state,
           errorMsg: null ,
-          result: result
+          evaluationSteps: evaluationSteps
         };
       } catch (e) {
         if (e instanceof ParsingError) {
@@ -72,7 +72,7 @@ export default function expressionReducer(state: ExpressionState, action: Expres
         tokens: remainingTokens,
         context: newContext,
         errorMsg: null,
-        result: null
+        evaluationSteps: null
       };
     }
     case "CLEAR":
@@ -84,7 +84,7 @@ export default function expressionReducer(state: ExpressionState, action: Expres
           "E": null, "F": null
         },
         errorMsg: null,
-        result: null
+        evaluationSteps: null
       };
     case "TOGGLE_VARIABLE_VALUE": {
       const newContext = { ...state.context };

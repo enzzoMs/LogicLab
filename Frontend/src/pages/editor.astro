@@ -5,7 +5,7 @@ import ExpressionEditor from "@components/editor/BooleanEditor";
 
 <PageLayout pageTitle="Expression Editor">
   <section>
-      <h3>Boolean Expression Editor</h3>
+      <h1>Boolean Expression Editor</h1>
       <p>Build, evaluate and simplify boolean expressions using logical operators and variables</p>
       <ExpressionEditor client:load/>
   </section>
@@ -16,8 +16,9 @@ import ExpressionEditor from "@components/editor/BooleanEditor";
     padding: var(--space-l) var(--space-2xl);
   }
 
-  h3 {
+  h1 {
     font-size: var(--text-xl);
+    margin-bottom: var(--space-xs);
   }
 
   p {

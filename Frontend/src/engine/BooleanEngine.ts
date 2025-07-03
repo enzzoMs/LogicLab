@@ -1,6 +1,6 @@
 import {BooleanParser} from "@engine/parser/BooleanParser.ts";
-import type {AST, BooleanToken} from "@engine/parser/AST.ts";
-import {evaluate, type VariableContext} from "@engine/evaluator/BooleanEvaluator.ts";
+import {type AST, type BooleanToken} from "@engine/parser/AST.ts";
+import BooleanEvaluator, {type VariableContext} from "@engine/evaluator/BooleanEvaluator.ts";
 
 /**
  * Handles boolean expressions processing, including parsing and evaluation.
@@ -8,6 +8,7 @@ import {evaluate, type VariableContext} from "@engine/evaluator/BooleanEvaluator
  */
 export default class BooleanEngine {
   private readonly parser = new BooleanParser();
+  private readonly evaluator = new BooleanEvaluator();
 
   private ast: AST | null = null;
 
@@ -23,11 +24,13 @@ export default class BooleanEngine {
    * Evaluates the parsed boolean expression using provided variable values.
    * @throws {Error} If the expression hasn't been parsed yet.
    * @throws {EvaluationError} If evaluation produced errors.
+   * @return An array of strings containing the step-by-step evaluation of the boolean expression.
    */
-  evaluate(context: VariableContext): boolean {
+  evaluate(context: VariableContext): string[] {
     if (!this.ast) {
       throw new Error("Expression must be parsed before evaluation");
     }
-    return evaluate(this.ast, context);
+
+    return this.evaluator.evaluate(this.ast, context);
   }
 }

@@ -6,6 +6,7 @@
   background-color: var(--color-surface-primary);
   padding: var(--space-m) var(--space-l);
   box-shadow: 0 2px 8px #0000001a;
+  margin-bottom: var(--space-m);
 }
 
 .editorButtons {
