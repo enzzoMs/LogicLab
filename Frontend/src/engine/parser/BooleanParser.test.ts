@@ -1,6 +1,6 @@
 import {beforeEach, describe, expect, test} from "vitest";
 import {BooleanParser, ParsingError} from "./BooleanParser.ts";
-import type {AST, ASTNode, BooleanToken} from "./AST.ts";
+import type {BooleanToken} from "./AST.ts";
 
 describe("BooleanParser", () => {
   let booleanParser: BooleanParser;
@@ -28,10 +28,9 @@ describe("BooleanParser", () => {
     ["( A AND B )", { type: "Parenthesized", innerNode: { type: "Binary", left: { type: "Variable", value: "A" }, operator: "AND", right: { type: "Variable", value: "B" } } }]
   ])("should correctly parse simple expression '%s'", ([expression, expectedNode]) => {
     const expressionTokens = (expression as string).split(" ") as BooleanToken[];
-    const expectedAST: AST = { root: expectedNode as ASTNode };
 
     const result = booleanParser.parse(expressionTokens);
-    expect(result).toEqual(expectedAST);
+    expect(result.root).toEqual(expectedNode);
   })
 
   test.for([
@@ -91,10 +90,9 @@ describe("BooleanParser", () => {
     ],
   ])("should correctly parse complex expression '%s'", ([expression, expectedNode]) => {
     const expressionTokens = (expression as string).split(" ") as BooleanToken[];
-    const expectedAST: AST = { root: expectedNode as ASTNode };
 
     const result = booleanParser.parse(expressionTokens);
-    expect(result).toEqual(expectedAST);
+    expect(result.root).toEqual(expectedNode);
   });
 
   test("should throw error if operator is missing", () => {

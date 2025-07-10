@@ -1,17 +1,16 @@
-import styles from "@components/editor/evaluation/EvaluationDisplay.module.css";
 import {useState} from "react";
+import type {EvaluationResult} from "@engine/evaluator/BooleanEvaluator";
+import styles from "@components/editor/evaluation/EvaluationDisplay.module.css";
 
 interface ExpressionEvaluationProps {
-  evaluationSteps: string[];
+  evaluationResult: EvaluationResult;
 }
 
-export default function EvaluationDisplay({ evaluationSteps }: ExpressionEvaluationProps) {
+export default function EvaluationDisplay({ evaluationResult }: ExpressionEvaluationProps) {
   const [showSteps, setShowSteps] = useState(false);
 
-  const finalResult = evaluationSteps[evaluationSteps.length - 1] === "TRUE";
-
   return (
-    <div className={styles.evaluationContainer}>
+    <div className={styles.displayContainer}>
       <div className={styles.evaluationHeader}>
         <h2>Evaluation Result</h2>
         <input
@@ -24,7 +23,7 @@ export default function EvaluationDisplay({ evaluationSteps }: ExpressionEvaluat
 
       {showSteps && (
         <div className={styles.stepsList}>
-          {evaluationSteps.map((step, index) => (
+          {evaluationResult.steps.map((step, index) => (
             <div key={step} className={styles.stepContainer}>
               <p>Step {index + 1}:</p>
               <p className={styles.step}>{step}</p>
@@ -32,8 +31,8 @@ export default function EvaluationDisplay({ evaluationSteps }: ExpressionEvaluat
           ))}
         </div>
       )}
-      <p className={finalResult ? styles.trueResult : styles.falseResult}>
-        {finalResult ? "True" : "False"}
+      <p className={evaluationResult.result ? styles.trueResult : styles.falseResult}>
+        {evaluationResult.result ? "True" : "False"}
       </p>
     </div>
   )

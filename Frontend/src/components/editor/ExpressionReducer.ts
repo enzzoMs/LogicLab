@@ -1,20 +1,23 @@
 import type {BooleanToken, Variable} from "@engine/parser/AST.ts";
-import {EvaluationError, type VariableContext} from "@engine/evaluator/BooleanEvaluator.ts";
+import {EvaluationError, type EvaluationResult, type VariableContext} from "@engine/evaluator/BooleanEvaluator.ts";
 import {ParsingError} from "@engine/parser/BooleanParser.ts";
 import BooleanEngine from "@engine/BooleanEngine.ts";
+import type {TruthTable} from "@engine/table-generator/TruthTableGenerator.ts";
 
 type ExpressionAction =
   | { type: "ADD_TOKEN"; token: BooleanToken }
-  | { type: "EVALUATE" }
   | { type: "UNDO" }
   | { type: "CLEAR" }
-  | { type: "TOGGLE_VARIABLE_VALUE"; variable: Variable };
+  | { type: "TOGGLE_VARIABLE_VALUE"; variable: Variable }
+  | { type: "EVALUATE" }
+  | { type: "GEN_TRUTH_TABLE" };
 
 export interface ExpressionState {
   tokens: BooleanToken[];
   context: VariableContext;
   errorMsg: string | null;
-  evaluationSteps: string[] | null;
+  evaluationResult: EvaluationResult | null;
+  truthTable: TruthTable | null;
 }
 
 const booleanEngine = new BooleanEngine();
@@ -25,24 +28,73 @@ export default function expressionReducer(state: ExpressionState, action: Expres
       const newToken = action.token;
       const newContext = { ...state.context };
 
-      if (isVariable(newToken) && newContext[newToken] === null) {
+      if (isVariable(newToken) && newContext[newToken] === undefined) {
         newContext[newToken] = false;
       }
       return {
         tokens: [...state.tokens, newToken],
         context: newContext,
         errorMsg: null,
-        evaluationSteps: null
+        evaluationResult: null,
+        truthTable: null
+      };
+    }
+    case "UNDO": {
+      const lastToken = state.tokens[state.tokens.length - 1];
+      const remainingTokens = state.tokens.slice(0, -1);
+
+      const newContext = { ...state.context };
+      
+      if (isVariable(lastToken) && countVariableOccurrences(remainingTokens, lastToken) === 0) {
+        newContext[lastToken] = undefined;
+      }
+      return {
+        tokens: remainingTokens,
+        context: newContext,
+        errorMsg: null,
+        evaluationResult: null,
+        truthTable: null
+      };
+    }
+    case "CLEAR":
+      return {
+        tokens: [],
+        context: {},
+        errorMsg: null,
+        evaluationResult: null,
+        truthTable: null
+      };
+    case "TOGGLE_VARIABLE_VALUE": {
+      const newContext = { ...state.context };
+      if (newContext[action.variable] !== undefined) {
+        newContext[action.variable] = !newContext[action.variable];
+      }
+
+      return {
+        ...state,
+        context: newContext
       };
     }
     case "EVALUATE":
+    case "GEN_TRUTH_TABLE":
       try {
         booleanEngine.parse(state.tokens);
-        const evaluationSteps = booleanEngine.evaluate(state.context);
+        let evaluation: EvaluationResult | null;
+        let truthTable: TruthTable | null;
+
+        if (action.type === "EVALUATE") {
+          evaluation = booleanEngine.evaluate(state.context);
+          truthTable = null;
+        } else {
+          evaluation = null;
+          truthTable = booleanEngine.generateTruthTable();
+        }
+
         return {
           ...state,
-          errorMsg: null ,
-          evaluationSteps: evaluationSteps
+          errorMsg: null,
+          truthTable: truthTable,
+          evaluationResult: evaluation
         };
       } catch (e) {
         if (e instanceof ParsingError) {
@@ -59,42 +111,6 @@ export default function expressionReducer(state: ExpressionState, action: Expres
         }
         throw e;
       }
-    case "UNDO": {
-      const lastToken = state.tokens[state.tokens.length - 1];
-      const remainingTokens = state.tokens.slice(0, -1);
-
-      const newContext = { ...state.context };
-      
-      if (isVariable(lastToken) && countVariableOccurrences(remainingTokens, lastToken) === 0) {
-        newContext[lastToken] = null;
-      }
-      return {
-        tokens: remainingTokens,
-        context: newContext,
-        errorMsg: null,
-        evaluationSteps: null
-      };
-    }
-    case "CLEAR":
-      return {
-        tokens: [],
-        context: {
-          "A": null, "B": null,
-          "C": null, "D": null,
-          "E": null, "F": null
-        },
-        errorMsg: null,
-        evaluationSteps: null
-      };
-    case "TOGGLE_VARIABLE_VALUE": {
-      const newContext = { ...state.context };
-      newContext[action.variable] = !newContext[action.variable];
-
-      return {
-        ...state,
-        context: newContext
-      };
-    }
     default:
       return state;
   }

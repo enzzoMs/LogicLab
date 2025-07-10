@@ -45,9 +45,9 @@ describe("BooleanEvaluator", () => {
       true
     ]
   ])("should correctly evaluate simple expression", ([node, context, expectedValue]) => {
-    const ast = { root: node as ASTNode };
-    const result = booleanEvaluator.evaluate(ast, context as VariableContext);
-    expect(result).toBe(expectedValue);
+    const ast: AST = { root: node as ASTNode, usedVariables: [] };
+    const evaluation = booleanEvaluator.evaluate(ast, context as VariableContext);
+    expect(evaluation.result).toBe(expectedValue);
   });
 
   test.for([
@@ -84,20 +84,20 @@ describe("BooleanEvaluator", () => {
       true
     ]
   ])("should correctly evaluate complex expression", ([node, context, expectedValue]) => {
-    const ast = { root: node as ASTNode };
-    const result = booleanEvaluator.evaluate(ast, context as VariableContext);
-    expect(result).toBe(expectedValue);
+    const ast: AST = { root: node as ASTNode, usedVariables: [] };
+    const evaluation = booleanEvaluator.evaluate(ast, context as VariableContext);
+    expect(evaluation.result).toBe(expectedValue);
   });
 
   test("should throw error when variable does not have a defined value", () => {
     const ast: AST = {
-      root: { type: "Variable", value: "A" }
+      root: { type: "Variable", value: "A" },
+      usedVariables: []
     };
-    const context: VariableContext = {
-      "A": null, "B": null, "C": null, "D": null, "E": null, "F": null
-    }
+    const context: VariableContext = {}
+
     expect(() => booleanEvaluator.evaluate(ast, context)).toThrowError(
-      new EvaluationError("Variable A does not have a defined value.")
+      new EvaluationError("Variable A does not have a defined value")
     );
   });
 
@@ -108,11 +108,10 @@ describe("BooleanEvaluator", () => {
         left: { type: "Variable", value: "A" },
         operator: "UNKNOWN" as BinaryOperator,
         right: { type: "Variable", value: "A" }
-      }
+      },
+      usedVariables: []
     };
-    const context: VariableContext = {
-      "A": true, "B": null, "C": null, "D": null, "E": null, "F": null
-    }
+    const context: VariableContext = { "A": true };
 
     expect(() => booleanEvaluator.evaluate(ast, context)).toThrowError(
       new EvaluationError("Unknown operator: Binary")

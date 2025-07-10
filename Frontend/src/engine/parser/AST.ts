@@ -8,6 +8,7 @@ export type Literal = "TRUE" | "FALSE";
 
 export interface AST {
   root: ASTNode;
+  usedVariables: Variable[];
 }
 
 export type ASTNode =

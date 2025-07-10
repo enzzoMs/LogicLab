@@ -34,12 +34,14 @@ export class ParsingError extends Error {
 }
 
 export class BooleanParser {
-  private tokens: BooleanToken[] = [];
+  private tokens!: BooleanToken[];
   private currentTokenIndex = 0;
+  private usedVariables!: Variable[];
 
   public parse(tokens: BooleanToken[]): AST {
     this.tokens = tokens;
     this.currentTokenIndex = 0;
+    this.usedVariables = [];
 
     const rootNode = this.parseBoolExpression();
 
@@ -47,7 +49,7 @@ export class BooleanParser {
       throw new ParsingError("Unexpected token", this.currentTokenIndex)
     }
 
-    return { root: rootNode }
+    return { root: rootNode, usedVariables: this.usedVariables };
   }
 
   private currentToken(): BooleanToken {
@@ -138,6 +140,9 @@ export class BooleanParser {
     const variableToken = this.currentToken();
 
     if (this.tryMatch("A", "B", "C", "D", "E", "F")) {
+      if (!this.usedVariables.includes(variableToken as Variable)) {
+        this.usedVariables.push(variableToken as Variable);
+      }
       return { type: "Variable", value: variableToken as Variable };
     }
 

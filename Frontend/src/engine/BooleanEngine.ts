@@ -1,6 +1,7 @@
 import {BooleanParser} from "@engine/parser/BooleanParser.ts";
 import {type AST, type BooleanToken} from "@engine/parser/AST.ts";
-import BooleanEvaluator, {type VariableContext} from "@engine/evaluator/BooleanEvaluator.ts";
+import BooleanEvaluator, {type EvaluationResult, type VariableContext} from "@engine/evaluator/BooleanEvaluator.ts";
+import {generateTruthTableFromAst, type TruthTable} from "@engine/table-generator/TruthTableGenerator.ts";
 
 /**
  * Handles boolean expressions processing, including parsing and evaluation.
@@ -22,15 +23,28 @@ export default class BooleanEngine {
 
   /**
    * Evaluates the parsed boolean expression using provided variable values.
-   * @throws {Error} If the expression hasn't been parsed yet.
-   * @throws {EvaluationError} If evaluation produced errors.
    * @return An array of strings containing the step-by-step evaluation of the boolean expression.
+   * @throws {Error} If the expression hasn't been parsed yet.
+   * @throws {EvaluationError} If the evaluation produced errors.
    */
-  evaluate(context: VariableContext): string[] {
+  evaluate(context: VariableContext): EvaluationResult {
     if (!this.ast) {
       throw new Error("Expression must be parsed before evaluation");
     }
 
     return this.evaluator.evaluate(this.ast, context);
+  }
+
+  /**
+   * Generates a truth table for the current boolean expression.
+   * @throws {Error} If the expression hasn't been parsed yet.
+   * @throws {EvaluationError} If any evaluation produced errors.
+   */
+  generateTruthTable(): TruthTable {
+    if (!this.ast) {
+      throw new Error("Expression must be parsed before generating truth table");
+    }
+
+    return generateTruthTableFromAst(this.ast, this.evaluator);
   }
 }

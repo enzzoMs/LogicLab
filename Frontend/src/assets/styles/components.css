@@ -1,6 +1,10 @@
 .btn-primary,
 .btn-outline,
-.btn-secondary {
+.btn-secondary,
+.btn-ghost {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4xs);
   font-family: inherit;
   font-size: inherit;
   font-weight: var(--weight-medium);
@@ -17,9 +21,19 @@
   padding: var(--space-xs) var(--space-m);
 }
 
+.btn-medium svg {
+  width: var(--text-m);
+  height: var(--text-m);
+}
+
 .btn-small {
   font-size: var(--text-s);
   padding: var(--space-2xs) var(--space-s);
+}
+
+.btn-small svg {
+  width: var(--text-s);
+  height: var(--text-s);
 }
 
 /* -------------------------------------------- */
@@ -71,6 +85,21 @@
 .btn-secondary:focus {
   outline: 2px solid var(--btn-secondary-bg-focused);
   outline-offset: 2px;
+}
+
+/* -------------------------------------------- */
+
+.btn-ghost {
+  color: var(--color-text-body);
+  background-color: transparent;
+  box-shadow: none;
+  transition: none;
+  padding: 0;
+}
+
+.btn-ghost:hover {
+  color: var(--color-text-title);
+  background-color: transparent;
 }
 
 /* -------------------------------------------- */

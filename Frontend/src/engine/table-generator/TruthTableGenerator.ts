@@ -1,0 +1,36 @@
+import BooleanEvaluator, {type VariableContext} from "../evaluator/BooleanEvaluator.ts";
+import type {AST, Variable} from "../parser/AST.ts";
+
+export interface TruthTable {
+  variables: Variable[];
+  rows: {
+    variableValues: boolean[];
+    result: boolean;
+  }[]
+}
+
+export function generateTruthTableFromAst(ast: AST, evaluator: BooleanEvaluator): TruthTable {
+  const variables = ast.usedVariables.sort();
+  const truthTable: TruthTable = { variables, rows: [] };
+
+  const numOfRows = 2 ** ast.usedVariables.length;
+
+  for (let row = 0; row < numOfRows; row++) {
+    const variableValues = row
+      .toString(2)
+      .padStart(variables.length, "0")
+      .split("")
+      .map((c) => c === "1");
+
+    const variableContext: VariableContext = {};
+
+    variables.forEach((variable, index) => {
+      variableContext[variable] = variableValues[index];
+    })
+
+    const evaluation = evaluator.evaluate(ast, variableContext);
+    truthTable.rows.push({ variableValues, result: evaluation.result });
+  }
+
+  return truthTable;
+}

@@ -1,6 +1,13 @@
-import {type AST, type ASTNode, ASTToString, type Variable} from "@engine/parser/AST.ts";
+import {type AST, type ASTNode, ASTToString, type Variable} from "../parser/AST.ts";
 
-export type VariableContext = Record<Variable, boolean | null>;
+export type VariableContext = {
+  [variable in Variable]?: boolean;
+};
+
+export interface EvaluationResult {
+  steps: string[];
+  result: boolean;
+}
 
 export class EvaluationError extends Error {
   constructor(message: string) {
@@ -15,17 +22,17 @@ export default class BooleanEvaluator {
   /**
    * @return An array of strings containing the step-by-step evaluation of the boolean expression.
    */
-  evaluate(ast: AST, context: VariableContext): string[] {
+  evaluate(ast: AST, context: VariableContext): EvaluationResult {
     this.evaluationSteps = [];
 
-    this.ast = ast;
+    this.ast = structuredClone(ast);
     this.addCurrentEvaluationStep();
 
-    const finalResult = this.evaluateNode(ast.root, context)
-    ast.root = { type: "Literal", value: finalResult };
+    const finalResult = this.evaluateNode(this.ast.root, context);
+    this.ast.root = { type: "Literal", value: finalResult };
     this.addCurrentEvaluationStep();
 
-    return this.evaluationSteps;
+    return { steps: this.evaluationSteps, result: finalResult };
   }
 
   private evaluateNode(node: ASTNode, context: VariableContext): boolean {
@@ -33,8 +40,8 @@ export default class BooleanEvaluator {
       case "Literal":
         return node.value;
       case "Variable":
-        if (context[node.value] === null) {
-          throw new EvaluationError(`Variable ${node.value} does not have a defined value.`);
+        if (context[node.value] === undefined) {
+          throw new EvaluationError(`Variable ${node.value} does not have a defined value`);
         }
         return context[node.value] as boolean;
       case "Unary": {

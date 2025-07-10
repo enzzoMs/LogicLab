@@ -7,6 +7,7 @@ interface TokenGroupProps {
   onTokenClicked: (token: BooleanToken) => void;
   tokenStyle: "outline" | "secondary";
 }
+
 export default function TokenGroup({ groupName, tokens, onTokenClicked, tokenStyle }: TokenGroupProps) {
   return (
     <>
