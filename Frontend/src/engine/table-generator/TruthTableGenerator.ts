@@ -34,3 +34,17 @@ export function generateTruthTableFromAst(ast: AST, evaluator: BooleanEvaluator)
 
   return truthTable;
 }
+
+export function truthTableToString(truthTable: TruthTable): string {
+  const NEW_LINE = "%0A";
+  const truthTableAsString: string[] = [];
+
+  truthTableAsString.push(...truthTable.variables.join(","));
+  truthTableAsString.push(",Result," + NEW_LINE);
+
+  for (const row of truthTable.rows) {
+    truthTableAsString.push(...row.variableValues.map((v) => v ? "1," : "0,"));
+    truthTableAsString.push((row.result ? "1," : "0,") + NEW_LINE);
+  }
+  return truthTableAsString.join("");
+}

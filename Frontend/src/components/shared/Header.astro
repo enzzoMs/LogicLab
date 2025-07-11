@@ -59,16 +59,19 @@ const navLinks: {page: AppPage, path: string, label: string }[] = [
     width: 100%;
     position: sticky;
     top: 0;
+    background-color: var(--color-surface-primary);
+    border-bottom: var(--border-thickness) solid var(--border-color);
   }
 
   header {
     width: 100%;
+    max-width: var(--max-body-width);
     display: flex;
     align-items: center;
     gap: var(--space-xs);
-    background-color: var(--color-surface-primary);
-    border-bottom: var(--border-thickness) solid var(--border-color);
     padding: var(--space-s) var(--space-xl);
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .app-logo-wrapper {
@@ -147,7 +150,8 @@ const navLinks: {page: AppPage, path: string, label: string }[] = [
     gap: var(--space-m);
     background-color: var(--color-surface-primary);
     padding: var(--space-m) var(--space-l);
-    box-shadow: 0 2px 8px #0000001a;
+    border-top: var(--border-thickness) solid var(--border-color);
+    box-shadow: 0 4px 8px -2px #0000001a;
   }
 
   #dropdown-nav.active {

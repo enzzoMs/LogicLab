@@ -99,6 +99,8 @@ body {
 
   --btn-secondary-bg: #e5e7eb;
   --btn-secondary-bg-focused: #d1d5db;
+
+  --max-body-width: 1536px;
 }
 
 /* FONTS ========== */

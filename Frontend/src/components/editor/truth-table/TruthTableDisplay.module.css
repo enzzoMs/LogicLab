@@ -30,6 +30,17 @@
 
 .tableHeader label {
   cursor: pointer;
+  border-right: var(--border-thickness) solid var(--border-color);
+  padding-right: var(--space-xs);
+  margin-right: var(--space-3xs);
+}
+
+.tableHeader a {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3xs);
+  color: inherit;
+  text-decoration: none;
 }
 
 .truthTable {

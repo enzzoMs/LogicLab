@@ -21,10 +21,18 @@ export interface ExpressionState {
 }
 
 const booleanEngine = new BooleanEngine();
+const MAX_TOKENS = 50;
 
 export default function expressionReducer(state: ExpressionState, action: ExpressionAction) {
   switch (action.type) {
     case "ADD_TOKEN": {
+      if (state.tokens.length >= MAX_TOKENS) {
+        return {
+          ...state,
+          errorMsg: `[ERROR] Expression cannot have more than ${MAX_TOKENS} tokens.`
+        }
+      }
+
       const newToken = action.token;
       const newContext = { ...state.context };
 

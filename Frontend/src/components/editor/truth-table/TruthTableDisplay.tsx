@@ -1,5 +1,6 @@
-import {useState} from "react";
-import type {TruthTable} from "@engine/table-generator/TruthTableGenerator";
+import {useRef, useState} from "react";
+import {Download} from "lucide-react";
+import {type TruthTable, truthTableToString} from "@engine/table-generator/TruthTableGenerator";
 import styles from "@components/editor/truth-table/TruthTableDisplay.module.css";
 
 export interface TruthTableDisplayProps {
@@ -8,6 +9,13 @@ export interface TruthTableDisplayProps {
 
 export default function TruthTableDisplay({ truthTable }: TruthTableDisplayProps) {
   const [highlightResults, setHighlightResults] = useState(false);
+  const exportLinkRef = useRef<HTMLAnchorElement>(null);
+
+  const exportAsCSV = () => {
+    if (exportLinkRef.current !== null) {
+      exportLinkRef.current.href = "data:text/plain," + truthTableToString(truthTable);
+    }
+  };
 
   return (
     <div className={styles.displayContainer}>
@@ -19,6 +27,11 @@ export default function TruthTableDisplay({ truthTable }: TruthTableDisplayProps
           checked={highlightResults}
           onChange={() => setHighlightResults(!highlightResults)}/>
         <label htmlFor="highlight-results">Highlight Results</label>
+        <button className="btn-ghost btn-small" onClick={exportAsCSV}>
+          <a ref={exportLinkRef} href="" download="truth-table.csv">
+            <Download /> Export CSV
+          </a>
+        </button>
       </div>
 
       <table className={styles.truthTable}>
