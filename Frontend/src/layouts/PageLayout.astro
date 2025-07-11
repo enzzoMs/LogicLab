@@ -1,13 +1,15 @@
 ---
 import Header from "@components/shared/Header.astro";
 import Footer from "@components/shared/Footer.astro";
+import type {AppPage} from "@components/shared/Header.astro";
 import appLogo from "@assets/icons/app-logo.svg?url";
 
 interface Props {
+  page: AppPage;
   pageTitle: string;
 }
 
-const { pageTitle } = Astro.props;
+const { page, pageTitle } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,7 +24,7 @@ const { pageTitle } = Astro.props;
     <title>{`${pageTitle} - LogicLab`}</title>
   </head>
   <body>
-    <Header />
+    <Header currentPage={page} />
     <main>
       <slot />
     </main>
