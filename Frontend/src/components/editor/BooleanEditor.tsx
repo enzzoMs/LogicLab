@@ -23,7 +23,7 @@ export default function BooleanEditor() {
   const addToken = (token: BooleanToken) => dispatch({ type: "ADD_TOKEN", token });
 
   return (
-    <>
+    <div className={styles.editorWrapper}>
       <div className={styles.editorContainer}>
         <ExpressionContainer
           tokens={expression.tokens}
@@ -31,20 +31,27 @@ export default function BooleanEditor() {
           onClearClicked={() => dispatch({ type: "CLEAR" })}
           errorMsg={expression.errorMsg} />
 
-        <TokenGroup
-          groupName="Variables"
-          tokens={["A", "B", "C", "D", "E", "F"]}
-          tokenStyle="outline"
-          onTokenClicked={addToken} />
+        <div className={styles.primaryTokensContainer}>
+          <TokenGroup
+            groupName="Variables"
+            tokens={["A", "B", "C", "D", "E", "F"]}
+            btnStyle="outline"
+            onTokenClicked={addToken} />
+          <TokenGroup
+            groupName="Literals"
+            tokens={["TRUE", "FALSE"]}
+            btnStyle="outline"
+            onTokenClicked={addToken} />
+        </div>
         <TokenGroup
           groupName="Operators"
-          tokens={["AND", "OR", "NOT", "XOR", "NAND", "NOR"]}
-          tokenStyle="secondary"
+          tokens={["AND", "OR", "NOT", "XOR", "NAND", "NOR", "IMPLICATION", "EQUIVALENCE"]}
+          btnStyle="secondary"
           onTokenClicked={addToken} />
         <TokenGroup
           groupName="Parentheses"
           tokens={["(", ")"]}
-          tokenStyle="outline"
+          btnStyle="outline"
           onTokenClicked={addToken} />
 
         {expressionHasVariables(expression) && (
@@ -69,7 +76,7 @@ export default function BooleanEditor() {
       {expression.truthTable !== null && (
         <TruthTableDisplay truthTable={expression.truthTable} />
       )}
-    </>
+    </div>
   )
 }
 

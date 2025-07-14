@@ -9,7 +9,17 @@ export interface TruthTable {
   }[]
 }
 
+export class TruthTableError extends Error {
+  constructor(message: string) {
+    super(message);
+  }
+}
+
 export function generateTruthTableFromAst(ast: AST, evaluator: BooleanEvaluator): TruthTable {
+  if (ast.usedVariables.length === 0) {
+    throw new TruthTableError("Cannot generate a truth table from an expression with no variables");
+  }
+
   const variables = ast.usedVariables.sort();
   const truthTable: TruthTable = { variables, rows: [] };
 

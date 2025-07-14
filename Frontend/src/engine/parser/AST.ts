@@ -1,6 +1,6 @@
 export type BooleanToken = Variable | BinaryOperator | UnaryOperator | Parentheses | Literal;
 
-export type BinaryOperator = "OR" | "NAND" | "XOR" | "AND" | "NOR";
+export type BinaryOperator = "OR" | "NAND" | "XOR" | "AND" | "NOR" | "EQUIVALENCE" | "IMPLICATION";
 export type UnaryOperator = "NOT";
 export type Variable = "A" | "B" | "C" | "D" | "E" | "F";
 export type Parentheses = "(" | ")";
@@ -47,5 +47,16 @@ function ASTNodeToString(node: ASTNode, strNodes: string[]): string[] {
       return strNodes;
     default:
       throw new Error(`Unknown node type: ${(node as ASTNode).type}`);
+  }
+}
+
+export function tokenToString(token: BooleanToken): string {
+  switch (token) {
+    case "IMPLICATION":
+      return "->";
+    case "EQUIVALENCE":
+      return "<=>";
+    default:
+      return token;
   }
 }

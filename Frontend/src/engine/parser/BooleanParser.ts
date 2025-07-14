@@ -1,7 +1,11 @@
+import type {AST, ASTNode, BinaryOperator, BooleanToken, Variable} from "@engine/parser/AST.ts";
+
 /*
 Grammar for Boolean expressions:
 
-<bool-expression> ::= <or_exp>
+<bool-expression> ::= <eqv_exp>
+<eqv_exp> ::= <impl_exp> ("IMPLICATION" <impl_exp>)*
+<impl_exp> ::= <or_exp> ("EQUIVALENCE" <or_exp>)*
 <or_exp> ::= <xor_exp> ("OR" <xor_exp>)*
 <xor_exp> ::= <nor_exp> ("XOR" <nor_exp>)*
 <nor_exp> ::= <and_exp> ("NOR" <and_exp>)*
@@ -21,8 +25,19 @@ order of precedence below (from highest to lowest):
 * NOR
 * XOR
 * OR
+* IMPLICATION
+* EQUIVALENCE
 */
-import type {AST, ASTNode, BooleanToken, Variable} from "@engine/parser/AST.ts";
+
+const binaryOperatorSequence: Map<BinaryOperator, BinaryOperator | "NOT"> = new Map([
+  ["EQUIVALENCE", "IMPLICATION"],
+  ["IMPLICATION", "OR"],
+  ["OR", "XOR"],
+  ["XOR", "NOR"],
+  ["NOR", "AND"],
+  ["AND", "NAND"],
+  ["NAND", "NOT"]
+]);
 
 export class ParsingError extends Error {
   tokenIndex: number;
@@ -65,55 +80,22 @@ export class BooleanParser {
   }
 
   private parseBoolExpression(): ASTNode {
-    return this.parseOrExpression();
+    return this.parseBinaryExpression("EQUIVALENCE");
   }
 
-  private parseOrExpression(): ASTNode {
-    let leftExp = this.parseXorExpression();
+  private parseBinaryExpression(operator: BinaryOperator): ASTNode {
+    const nextOperator = binaryOperatorSequence.get(operator)!;
 
-    while (this.tryMatch("OR")) {
-      const rightExp = this.parseXorExpression();
-      leftExp = { type: "Binary", left: leftExp, operator: "OR", right: rightExp };
-    }
-    return leftExp;
-  }
+    let leftExp = nextOperator === "NOT" ?
+      this.parseNotExpression() :
+      this.parseBinaryExpression(nextOperator);
 
-  private parseXorExpression(): ASTNode {
-    let leftExp = this.parseNorExpression();
+    while (this.tryMatch(operator)) {
+      const rightExp = nextOperator === "NOT" ?
+        this.parseNotExpression() :
+        this.parseBinaryExpression(nextOperator);
 
-    while (this.tryMatch("XOR")) {
-      const rightExp = this.parseNorExpression();
-      leftExp = { type: "Binary", left: leftExp, operator: "XOR", right: rightExp };
-    }
-    return leftExp;
-  }
-
-  private parseNorExpression(): ASTNode {
-    let leftExp = this.parseAndExpression();
-
-    while (this.tryMatch("NOR")) {
-      const rightExp = this.parseAndExpression();
-      leftExp = { type: "Binary", left: leftExp, operator: "NOR", right: rightExp };
-    }
-    return leftExp;
-  }
-
-  private parseAndExpression(): ASTNode {
-    let leftExp = this.parseNandExpression();
-
-    while (this.tryMatch("AND")) {
-      const rightExp = this.parseNandExpression();
-      leftExp = { type: "Binary", left: leftExp, operator: "AND", right: rightExp };
-    }
-    return leftExp;
-  }
-
-  private parseNandExpression(): ASTNode {
-    let leftExp = this.parseNotExpression();
-
-    while (this.tryMatch("NAND")) {
-      const rightExp = this.parseNotExpression();
-      leftExp = { type: "Binary", left: leftExp, operator: "NAND", right: rightExp };
+      leftExp = { type: "Binary", left: leftExp, operator: operator, right: rightExp };
     }
     return leftExp;
   }

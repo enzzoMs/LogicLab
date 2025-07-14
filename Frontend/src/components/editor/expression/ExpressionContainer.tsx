@@ -1,5 +1,6 @@
+import {Info, RotateCcw, Trash2} from "lucide-react";
 import type {BooleanToken} from "@engine/parser/AST";
-import {RotateCcw, Trash2} from "lucide-react";
+import {tokenToString} from "@engine/parser/AST";
 import styles from "@components/editor/expression/ExpressionContainer.module.css";
 
 interface ExpressionContainerProps {
@@ -15,7 +16,13 @@ export default function ExpressionContainer(props: ExpressionContainerProps) {
   return (
     <div className={styles.containerWrapper}>
       <div className={styles.containerHeader}>
-        <h2>Current Expression</h2>
+        <h2>
+          Current Expression
+          <span className={styles.precedenceTooltip}
+            title="Precende Order:&#013;( ), NOT, NAND, AND,&#013;NOR, XOR, OR,&#013;->, <=>">
+            <Info />
+          </span>
+        </h2>
         <button className="btn-ghost btn-small" onClick={onUndoClicked}>
           <RotateCcw /> Undo
         </button>
@@ -33,8 +40,8 @@ export default function ExpressionContainer(props: ExpressionContainerProps) {
         {tokens.map((token, index) => (
           <span
             key={`${token}-${index}`}
-            className={styles.token}>
-            {token}
+            className={getTokenStyle(token)}>
+            {tokenToString(token)}
           </span>
         ))}
       </div>
@@ -44,4 +51,12 @@ export default function ExpressionContainer(props: ExpressionContainerProps) {
       )}
     </div>
   )
+}
+
+function getTokenStyle(token: BooleanToken) {
+  if (token === "IMPLICATION" || token === "EQUIVALENCE") {
+    return styles.monospaceToken;
+  } else {
+    return styles.token;
+  }
 }

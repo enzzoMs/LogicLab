@@ -10,11 +10,25 @@
 }
 
 .containerHeader h2 {
+  display: flex;
+  gap: var(--space-xs);
+  align-items: center;
   color: var(--color-text-body);
   font-size: var(--text-s);
   font-weight: var(--weight-medium);
   margin-right: auto;
   margin-bottom: 0;
+}
+
+.precedenceTooltip {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.precedenceTooltip svg {
+  width: var(--text-m);
+  height: var(--text-m);
 }
 
 .expressionContainer {
@@ -25,7 +39,7 @@
   padding: var(--space-2xs) var(--space-xs);
 }
 
-.token, .hint {
+.token, .monospaceToken, .hint {
   color: var(--btn-outline-text-color);
   font-size: var(--text-s);
   font-weight: var(--weight-medium);
@@ -33,6 +47,10 @@
   border: var(--border-thickness) solid var(--border-color);
   border-radius: var(--border-radius);
   padding: var(--space-4xs) var(--space-2xs);
+}
+
+.monospaceToken {
+  font-family: Monospaced, monospace;
 }
 
 .hint {

@@ -43,6 +43,16 @@ describe("BooleanEvaluator", () => {
       { type: "Binary", left: { type: "Variable", value: "A" }, operator: "NOR", right: { type: "Variable", value: "B" } },
       { A: false, B: false },
       true
+    ],
+    [
+      { type: "Binary", left: { type: "Variable", value: "A" }, operator: "EQUIVALENCE", right: { type: "Variable", value: "B" } },
+      { A: false, B: false },
+      true
+    ],
+    [
+      { type: "Binary", left: { type: "Variable", value: "A" }, operator: "IMPLICATION", right: { type: "Variable", value: "B" } },
+      { A: false, B: false },
+      true
     ]
   ])("should correctly evaluate simple expression", ([node, context, expectedValue]) => {
     const ast: AST = { root: node as ASTNode, usedVariables: [] };

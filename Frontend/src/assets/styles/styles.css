@@ -137,6 +137,14 @@ body {
   src: url("../fonts/Outfit-Bold.ttf") format("truetype");
 }
 
+@font-face {
+  font-display: swap;
+  font-family: "Monospaced";
+  font-style: normal;
+  font-weight: 500;
+  src: url("../fonts/RobotoMono-Medium.ttf") format("truetype");
+}
+
 /* TYPOGRAPHY ========== */
 
 h1 {

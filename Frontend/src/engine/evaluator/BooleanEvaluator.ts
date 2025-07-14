@@ -19,46 +19,45 @@ export default class BooleanEvaluator {
   private ast!: AST;
   private evaluationSteps: string[] = [];
 
-  /**
-   * @return An array of strings containing the step-by-step evaluation of the boolean expression.
-   */
   evaluate(ast: AST, context: VariableContext): EvaluationResult {
     this.evaluationSteps = [];
 
     this.ast = structuredClone(ast);
     this.addCurrentEvaluationStep();
 
-    const finalResult = this.evaluateNode(this.ast.root, context);
-    this.ast.root = { type: "Literal", value: finalResult };
-    this.addCurrentEvaluationStep();
-
-    return { steps: this.evaluationSteps, result: finalResult };
+    if (this.ast.root.type !== "Literal") {
+      this.ast.root = { type: "Literal", value: this.evaluateNode(this.ast.root, context) };
+      this.addCurrentEvaluationStep();
+    }
+    return { steps: this.evaluationSteps, result: this.ast.root.value };
   }
 
   private evaluateNode(node: ASTNode, context: VariableContext): boolean {
     switch (node.type) {
-      case "Literal":
-        return node.value;
       case "Variable":
         if (context[node.value] === undefined) {
           throw new EvaluationError(`Variable ${node.value} does not have a defined value`);
         }
         return context[node.value] as boolean;
       case "Unary": {
-        const innerValue = this.evaluateNode(node.innerNode, context);
-        node.innerNode = { type: "Literal", value: innerValue }
-        this.addCurrentEvaluationStep();
-
-        return !innerValue;
+        if (node.innerNode.type !== "Literal") {
+          node.innerNode = { type: "Literal", value: this.evaluateNode(node.innerNode, context) }
+          this.addCurrentEvaluationStep();
+        }
+        return !node.innerNode.value;
       }
       case "Binary": {
-        const leftValue = this.evaluateNode(node.left, context);
-        node.left = { type: "Literal", value: leftValue };
-        this.addCurrentEvaluationStep();
+        if (node.left.type !== "Literal") {
+          node.left = { type: "Literal", value: this.evaluateNode(node.left, context) };
+          this.addCurrentEvaluationStep();
+        }
+        if (node.right.type !== "Literal") {
+          node.right = { type: "Literal", value: this.evaluateNode(node.right, context) };
+          this.addCurrentEvaluationStep();
+        }
 
-        const rightValue = this.evaluateNode(node.right, context);
-        node.right = { type: "Literal", value: rightValue };
-        this.addCurrentEvaluationStep();
+        const leftValue = node.left.value;
+        const rightValue = node.right.value;
 
         switch (node.operator) {
           case "AND": return leftValue && rightValue;
@@ -66,16 +65,18 @@ export default class BooleanEvaluator {
           case "XOR": return leftValue !== rightValue;
           case "NAND": return !(leftValue && rightValue);
           case "NOR": return !(leftValue || rightValue);
+          case "IMPLICATION": return !leftValue || (leftValue && rightValue);
+          case "EQUIVALENCE": return leftValue === rightValue;
           default:
             throw new EvaluationError(`Unknown operator: ${(node as ASTNode).type}`);
         }
       }
       case "Parenthesized": {
-        const innerValue = this.evaluateNode(node.innerNode, context);
-        node.innerNode = { type: "Literal", value: innerValue }
-        this.addCurrentEvaluationStep();
-        
-        return innerValue;
+        if (node.innerNode.type !== "Literal") {
+          node.innerNode = { type: "Literal", value: this.evaluateNode(node.innerNode, context) }
+          this.addCurrentEvaluationStep();
+        }
+        return node.innerNode.value;
       }
       default:
         throw new EvaluationError(`Unknown node type: ${(node as ASTNode).type}`);

@@ -11,3 +11,7 @@
   gap: var(--space-xs);
   margin-bottom: var(--space-s);
 }
+
+.monospaceToken {
+  font-family: "Monospaced", monospace;
+}

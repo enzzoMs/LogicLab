@@ -38,6 +38,7 @@ export default class BooleanEngine {
   /**
    * Generates a truth table for the current boolean expression.
    * @throws {Error} If the expression hasn't been parsed yet.
+   * @throws {TruthTableError} If the expression has no variables.
    * @throws {EvaluationError} If any evaluation produced errors.
    */
   generateTruthTable(): TruthTable {

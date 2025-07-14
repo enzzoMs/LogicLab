@@ -1,6 +1,9 @@
+.editorWrapper {
+  width: 100%;
+  max-width: 45em;
+}
+
 .editorContainer {
-  width: 800px;
-  height: 100%;
   display: flex;
   flex-direction: column;
   background-color: var(--color-surface-primary);
@@ -9,8 +12,15 @@
   margin-bottom: var(--space-m);
 }
 
+.primaryTokensContainer {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: var(--space-xl);
+}
+
 .editorButtons {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: flex-start;
   gap: var(--space-xs);

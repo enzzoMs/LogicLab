@@ -2,7 +2,7 @@ import type {BooleanToken, Variable} from "@engine/parser/AST.ts";
 import {EvaluationError, type EvaluationResult, type VariableContext} from "@engine/evaluator/BooleanEvaluator.ts";
 import {ParsingError} from "@engine/parser/BooleanParser.ts";
 import BooleanEngine from "@engine/BooleanEngine.ts";
-import type {TruthTable} from "@engine/table-generator/TruthTableGenerator.ts";
+import {type TruthTable, TruthTableError} from "@engine/table-generator/TruthTableGenerator.ts";
 
 type ExpressionAction =
   | { type: "ADD_TOKEN"; token: BooleanToken }
@@ -108,12 +108,16 @@ export default function expressionReducer(state: ExpressionState, action: Expres
         if (e instanceof ParsingError) {
           return {
             ...state,
+            evaluationResult: null,
+            truthTable: null,
             errorMsg: `[ERROR] - ${e.message} at position ${e.tokenIndex + 1}.`,
           };
         }
-        if (e instanceof EvaluationError) {
+        if (e instanceof EvaluationError || e instanceof TruthTableError) {
           return {
             ...state,
+            evaluationResult: null,
+            truthTable: null,
             errorMsg: `[ERROR] - ${e.message}.`,
           }
         }

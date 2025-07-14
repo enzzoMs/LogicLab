@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { generateTruthTableFromAst } from "./TruthTableGenerator.ts";
+import {generateTruthTableFromAst, TruthTableError} from "./TruthTableGenerator.ts";
 import BooleanEvaluator from "../evaluator/BooleanEvaluator";
 import type { AST } from "../parser/AST";
 
@@ -85,4 +85,12 @@ describe("generateTruthTableFromAst", () => {
     expect(truthTable.variables).toEqual(["A", "F"]);
     expect(truthTable.rows[0].variableValues).toHaveLength(2);
   });
+
+  it("should throw error if the AST has no variables", () => {
+    const ast: AST = {root: {type: "Literal", value: false}, usedVariables: []};
+
+    expect(() => generateTruthTableFromAst(ast, evaluator)).toThrowError(
+      new TruthTableError("Cannot generate a truth table from an expression with no variables")
+    );
+  })
 });
