@@ -31,12 +31,12 @@ function ASTNodeToString(node: ASTNode, strNodes: string[]): string[] {
       strNodes.push(node.value);
       return strNodes;
     case "Unary":
-      strNodes.push(node.operator);
+      strNodes.push(tokenToString(node.operator));
       strNodes.concat(ASTNodeToString(node.innerNode, strNodes));
       return strNodes;
     case "Binary": {
       strNodes.concat(ASTNodeToString(node.left, strNodes));
-      strNodes.push(node.operator);
+      strNodes.push(tokenToString(node.operator));
       strNodes.concat(ASTNodeToString(node.right, strNodes));
       return strNodes;
     }

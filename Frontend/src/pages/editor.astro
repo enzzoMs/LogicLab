@@ -4,16 +4,27 @@ import ExpressionEditor from "@components/editor/BooleanEditor";
 ---
 
 <PageLayout page="editor" pageTitle="Expression Editor">
-  <section>
+  <div class="page-wrapper">
+    <section>
       <h1>Boolean Expression Editor</h1>
       <p>Build, evaluate and simplify boolean expressions using logical operators and variables</p>
       <ExpressionEditor client:load/>
-  </section>
+    </section>
+  </div>
 </PageLayout>
 
 <style>
+  .page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-image: url("/deco_square.svg");
+    background-repeat: round;
+  }
+
   section {
     padding: var(--space-l) var(--space-2xl);
+    background-color: var(--color-background);
   }
 
   h1 {
