@@ -3,11 +3,13 @@
 .btn-secondary,
 .btn-ghost {
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: var(--space-4xs);
   font-family: inherit;
   font-size: inherit;
   font-weight: var(--weight-medium);
+  text-decoration: none;
   cursor: pointer;
   border: none;
   border-radius: var(--border-radius);

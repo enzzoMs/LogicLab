@@ -6,26 +6,22 @@ interface Props {
   title: string;
   description: string;
   duration: number;
-  difficulty: "beginner" | "intermediate" | "advanced";
+  difficulty: "Beginner" | "Intermediate" | "Advanced";
 }
 
 const { title, description, duration, difficulty } = Astro.props;
 
 let badgeStyle: string;
-let badgeText: string;
 
 switch (difficulty) {
-  case "beginner":
+  case "Beginner":
     badgeStyle = "green";
-    badgeText = "Beginner";
     break;
-  case "intermediate":
+  case "Intermediate":
     badgeStyle = "yellow";
-    badgeText = "Intermediate";
     break;
-  case "advanced":
+  case "Advanced":
     badgeStyle = "red";
-    badgeText = "Advanced";
     break;
 }
 ---
@@ -34,7 +30,7 @@ switch (difficulty) {
   <Card title={title} icon={BookOpen}>
     <div class="lesson">
       <div class="lesson-header">
-        <p class={`badge-${badgeStyle}`}>{badgeText}</p>
+        <p class={`badge-${badgeStyle}`}>{difficulty}</p>
         <div class="lesson-duration">
           <Clock /> <p>{duration} min</p>
         </div>
@@ -48,7 +44,7 @@ switch (difficulty) {
 </article>
 
 <style>
-  article {
+  article > :global(*) {
     height: 100%;
   }
 

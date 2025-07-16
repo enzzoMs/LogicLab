@@ -1,0 +1,117 @@
+---
+import {getCollection} from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import LessonCard from "@components/lessons/LessonCard.astro";
+import Card from "../components/shared/Card.astro";
+
+const lessons = await getCollection("lessons");
+---
+
+<PageLayout page="lessons" pageTitle="Lessons">
+  <section>
+    <h1>Boolean Algebra Lessons</h1>
+    <p>Master boolean algebra through structured lessons and hands-on examples.</p>
+    <div class="lessons-wrapper">
+      <div class="lessons-list">
+        {lessons.map(lesson => (
+          <LessonCard
+            title={lesson.data.title}
+            description={lesson.data.description}
+            duration={lesson.data.minutesDuration}
+            difficulty={lesson.data.difficulty} />
+        ))}
+      </div>
+      <aside>
+        <Card title="Learning Path">
+          <p class="learning-step">
+            <span class="beginner-step"></span>Basic Concepts
+          </p>
+          <p class="learning-step">
+            <span class="intermediate-step"></span>Intermediate Lessons
+          </p>
+          <p class="learning-step">
+            <span class="advanced-step"></span>Advanced Topics
+          </p>
+        </Card>
+        <Card title="Quick Tools">
+          <a href="/editor" class="btn-outline btn-small">Expression Editor</a>
+          <a href="/editor" class="btn-outline btn-small">Truth Tables</a>
+          <a href="/editor" class="btn-outline btn-small">K-Maps</a>
+          <a href="/quizzes" class="btn-outline btn-small">Quizzes</a>
+        </Card>
+      </aside>
+    </div>
+  </section>
+</PageLayout>
+
+<style>
+  section {
+    padding: var(--space-l) var(--space-2xl);
+    background-color: var(--color-background);
+  }
+
+  section > h1 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-xs);
+  }
+
+  section > p {
+    font-size: var(--text-m);
+    margin-bottom: var(--space-l);
+  }
+
+  .lessons-wrapper {
+    display: flex;
+    gap: var(--space-m);
+  }
+
+  aside {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+  }
+
+  .lessons-list {
+    flex: 2.5;
+  }
+
+  .learning-step {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2xs);
+    margin-bottom: var(--space-3xs);
+  }
+
+  .beginner-step, .intermediate-step, .advanced-step {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+  }
+
+  .beginner-step { background-color: #22C55E; }
+  .intermediate-step { background-color: #EAB308; }
+  .advanced-step { background-color: #EF4444; }
+
+  @media (max-width: 1024px) {
+    .lessons-wrapper {
+      flex-direction: column;
+    }
+
+    aside {
+      order: -1;
+      flex-direction: row;
+      align-content: stretch;
+    }
+
+    aside > :global(*) {
+      flex: 1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    aside {
+      flex-direction: column;
+    }
+  }
+</style>
