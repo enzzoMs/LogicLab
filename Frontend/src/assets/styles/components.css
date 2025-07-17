@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   gap: var(--space-4xs);
   font-family: inherit;
   font-size: inherit;

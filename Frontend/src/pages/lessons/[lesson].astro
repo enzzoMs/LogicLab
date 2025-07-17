@@ -1,0 +1,267 @@
+---
+import {getCollection, render} from "astro:content";
+import {BookOpen, Clock} from "@lucide/astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import Card from "@components/shared/Card.astro";
+
+export async function getStaticPaths() {
+  const lessons = await getCollection("lessons");
+  return lessons.map(lesson => ({
+    params: { lesson: lesson.id },
+    props: { lesson }
+  }));
+}
+
+const { lesson } = Astro.props;
+const { Content, headings } = await render(lesson);
+
+let badgeStyle: string;
+
+switch (lesson.data.difficulty) {
+  case "Beginner":
+    badgeStyle = "green";
+    break;
+  case "Intermediate":
+    badgeStyle = "yellow";
+    break;
+  case "Advanced":
+    badgeStyle = "red";
+    break;
+}
+---
+
+<PageLayout page="lessons" pageTitle={lesson.data.title}>
+  <article>
+    <div class="lesson-wrapper">
+      <div class="lesson-header">
+        <BookOpen />
+        <h1>{lesson.data.title}</h1>
+        <p>{lesson.data.description}</p>
+      </div>
+      <div class="lesson-details">
+        <p class={`badge-${badgeStyle}`}>{lesson.data.difficulty}</p>
+        <div class="lesson-duration">
+          <Clock /> <p>{lesson.data.minutesDuration} min</p>
+        </div>
+      </div>
+      <Content />
+    </div>
+    <aside>
+      <Card title="Outline">
+        {headings
+          .filter(h => h.depth === 2)
+          .map(h => (<a href={`#${h.slug}`} class="btn-outline btn-small">{h.text}</a>))
+        }
+      </Card>
+      <Card title="Quick Tools">
+        <a href="/editor" class="btn-outline btn-small">Expression Editor</a>
+        <a href="/editor" class="btn-outline btn-small">Truth Tables</a>
+        <a href="/editor" class="btn-outline btn-small">K-Maps</a>
+        <a href="/quizzes" class="btn-outline btn-small">Quizzes</a>
+      </Card>
+    </aside>
+  </article>
+</PageLayout>
+
+<style>
+  article {
+    display: flex;
+    gap: var(--space-m);
+    padding: var(--space-l) var(--space-2xl);
+  }
+
+  .lesson-wrapper {
+    flex: 2.5;
+    background-color: var(--color-surface-primary);
+    padding: var(--space-m) var(--space-l);
+    box-shadow: 0 2px 8px #0000001a;
+  }
+
+  .lesson-header {
+    display: grid;
+    column-gap: var(--space-m);
+    row-gap: var(--space-2xs);
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+  }
+
+  .lesson-header svg {
+    box-sizing: content-box;
+    grid-row: 1 / span 2;
+    align-self: center;
+    width: 1.75em;
+    height: 1.75em;
+    color: var(--color-primary);
+    background-color: var(--color-primary-extra-light);
+    padding: var(--space-xs);
+  }
+
+  .lesson-header h1,
+  .lesson-header p {
+    margin: 0;
+  }
+
+  .lesson-details {
+    display: flex;
+    gap: var(--space-xs);
+  }
+
+  .lesson-duration {
+    display: flex;
+    align-items: center;
+    font-size: var(--text-s);
+    gap: var(--space-2xs);
+  }
+
+  .lesson-duration svg {
+    width: 1.25em;
+    height: 1.25em;
+  }
+
+  aside {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+  }
+
+  @media (max-width: 1024px) {
+    article {
+      flex-direction: column;
+    }
+
+    aside {
+      order: -1;
+      flex-direction: row;
+      align-content: stretch;
+    }
+
+    aside > :global(*) {
+      flex: 1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    aside {
+      flex-direction: column;
+    }
+  }
+</style>
+
+<style is:global>
+  .lesson-wrapper h1 {
+    font-size: var(--text-2xl);
+  }
+
+  .lesson-wrapper p,
+  .lesson-wrapper ul {
+    font-size: var(--text-m);
+    margin: var(--space-xs) 0;
+  }
+
+  .lesson-wrapper h2 {
+    font-size: var(--text-xl);
+    font-weight: var(--weight-semibold);
+    margin-top: var(--space-m);
+    margin-bottom: var(--space-xs);
+  }
+
+  .lesson-wrapper h3 {
+    font-size: var(--text-l);
+    font-weight: var(--weight-semibold);
+    margin-top: var(--space-m);
+    margin-bottom: var(--space-xs);
+  }
+
+  .lesson-wrapper ol {
+    margin: var(--space-m) var(--space-s);
+  }
+
+  .lesson-wrapper li {
+    list-style-position: inside;
+    margin-bottom: var(--space-m);
+  }
+
+  .lesson-wrapper li p {
+    display: inline;
+  }
+
+  .lesson-wrapper code {
+    display: inline-block;
+    font-size: var(--text-s);
+    font-family: "Monospaced", monospace;
+    background-color: var(--color-surface-secondary);
+    padding: 0.025em 0.3em;
+    margin: 0 0.3em;
+  }
+
+  .lesson-wrapper table {
+    text-align: center;
+    border-spacing: 0;
+    margin: var(--space-s) auto var(--space-l) auto;
+  }
+
+  .lesson-wrapper table th {
+    color: var(--color-text-title);
+    font-weight: var(--weight-semibold);
+    background-color: var(--color-surface-secondary);
+    padding: var(--space-2xs) var(--space-xl);
+    border-bottom: var(--border-thickness) solid var(--border-color);
+  }
+
+  .lesson-wrapper table td {
+    padding: var(--space-xs);
+    border-bottom: var(--border-thickness) solid var(--border-color);
+  }
+
+  .figures-container {
+    --image-size: 20em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2xl);
+    margin-top: var(--space-l);
+  }
+
+  .figures-container figure {
+    text-align: center;
+    display: inline-block;
+  }
+
+  .figures-container figure img {
+    object-fit: contain;
+    height: var(--image-size);
+    margin-bottom: var(--space-xs);
+  }
+
+  @media (max-width: 640px) {
+    .figures-container {
+      --image-size: 14em;
+      flex-direction: column;
+    }
+  }
+
+  @media (min-width: 640px) {
+    .figures-container {
+      --image-size: 14em;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .figures-container {
+      --image-size: 16em;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .figures-container {
+      --image-size: 18em;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .figures-container {
+      --image-size: 20em;
+    }
+  }
+</style>
