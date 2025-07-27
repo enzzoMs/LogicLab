@@ -154,16 +154,24 @@ switch (lesson.data.difficulty) {
   }
 
   .lesson-wrapper p,
-  .lesson-wrapper ul {
+  .lesson-wrapper ul,
+  .lesson-wrapper ol {
     font-size: var(--text-m);
     margin: var(--space-xs) 0;
+  }
+
+  .lesson-wrapper ul,
+  .lesson-wrapper ol {
+    margin-top: var(--space-s);
+    margin-left: var(--space-xs);
+    margin-right: var(--space-xs);
   }
 
   .lesson-wrapper h2 {
     font-size: var(--text-xl);
     font-weight: var(--weight-semibold);
     margin-top: var(--space-m);
-    margin-bottom: var(--space-xs);
+    margin-bottom: var(--space-s);
   }
 
   .lesson-wrapper h3 {
@@ -173,13 +181,9 @@ switch (lesson.data.difficulty) {
     margin-bottom: var(--space-xs);
   }
 
-  .lesson-wrapper ol {
-    margin: var(--space-m) var(--space-s);
-  }
-
   .lesson-wrapper li {
     list-style-position: inside;
-    margin-bottom: var(--space-m);
+    margin-bottom: var(--space-s);
   }
 
   .lesson-wrapper li p {

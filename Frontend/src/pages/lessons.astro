@@ -13,12 +13,13 @@ const lessons = await getCollection("lessons");
     <p>Master boolean algebra through structured lessons and hands-on examples.</p>
     <div class="lessons-wrapper">
       <div class="lessons-list">
-        {lessons.map(lesson => (
+        {lessons.sort((a, b) => a.data.order - b.data.order).map(lesson => (
           <LessonCard
             title={lesson.data.title}
             description={lesson.data.description}
             duration={lesson.data.minutesDuration}
-            difficulty={lesson.data.difficulty} />
+            difficulty={lesson.data.difficulty}
+            lessonName={lesson.id}/>
         ))}
       </div>
       <aside>
@@ -74,6 +75,9 @@ const lessons = await getCollection("lessons");
 
   .lessons-list {
     flex: 2.5;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
   }
 
   .learning-step {

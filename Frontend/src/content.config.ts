@@ -9,6 +9,7 @@ const lessons = defineCollection({
     description: z.string(),
     minutesDuration: z.number(),
     difficulty: z.enum(["Beginner", "Intermediate", "Advanced"]),
+    order: z.number()
   })
 });
 

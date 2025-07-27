@@ -1,31 +1,27 @@
 ---
+import {getEntry} from "astro:content";
 import Section from "@components/shared/Section.astro";
 import LessonCard from "@components/lessons/LessonCard.astro";
+
+const lessons = [
+  await getEntry("lessons", "introduction-to-boolean-algebra")!,
+  await getEntry("lessons", "basic-logic-operations-and-or-not")!,
+  await getEntry("lessons", "understanding-de-morgan-laws")!,
+  await getEntry("lessons", "karnaugh-maps-basics")!
+]
 ---
 
 <Section
   title="Learning Resources"
   subtitle="Enhance your understanding with comprehensive tutorials and guides">
   <div class="responsive-grid gap-m cols-1 cols-md-2">
-    <LessonCard
-      title="Introduction to Boolean Algebra"
-      description="Learn the fundamentals of Boolean Algebra, basic operators, and truth values."
-      difficulty="Beginner"
-      duration={15}/>
-    <LessonCard
-      title="Logical Operators: AND, OR, NOT"
-      description="Master the three fundamental logical operators and their properties."
-      difficulty="Beginner"
-      duration={20}/>
-    <LessonCard
-      title="De Morgan's Laws"
-      description="Understand and apply De Morgan's Laws for expression transformation."
-      difficulty="Intermediate"
-      duration={25}/>
-    <LessonCard
-      title="Karnaugh Maps"
-      description="Learn a visual method for simplifying boolean expression using K-Maps."
-      difficulty="Advanced"
-      duration={35}/>
+    {lessons.sort((a, b) => a.data.order - b.data.order).map(lesson => (
+      <LessonCard
+        title={lesson.data.title}
+        description={lesson.data.description}
+        duration={lesson.data.minutesDuration}
+        difficulty={lesson.data.difficulty}
+        lessonName={lesson.id}/>
+    ))}
   </div>
 </Section>

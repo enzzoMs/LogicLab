@@ -7,9 +7,10 @@ interface Props {
   description: string;
   duration: number;
   difficulty: "Beginner" | "Intermediate" | "Advanced";
+  lessonName: string;
 }
 
-const { title, description, duration, difficulty } = Astro.props;
+const { title, description, duration, difficulty, lessonName } = Astro.props;
 
 let badgeStyle: string;
 
@@ -36,9 +37,9 @@ switch (difficulty) {
         </div>
       </div>
       <p>{description}</p>
-      <button class="btn-primary btn-small">
+      <a href={`/lessons/${lessonName}`} class="btn-primary btn-small">
         Start <ArrowRight />
-      </button>
+      </a>
     </div>
   </Card>
 </article>
@@ -78,7 +79,7 @@ switch (difficulty) {
     flex: 1;
   }
 
-  button {
+  a {
     align-self: end;
     display: flex;
     align-items: center;
@@ -86,7 +87,7 @@ switch (difficulty) {
     gap: var(--space-3xs);
   }
 
-  button svg {
+  a svg {
     width: 1.25em;
     height: 1.25em;
   }
