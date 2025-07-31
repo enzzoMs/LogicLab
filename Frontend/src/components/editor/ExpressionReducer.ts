@@ -10,7 +10,8 @@ type ExpressionAction =
   | { type: "CLEAR" }
   | { type: "TOGGLE_VARIABLE_VALUE"; variable: Variable }
   | { type: "EVALUATE" }
-  | { type: "GEN_TRUTH_TABLE" };
+  | { type: "GEN_TRUTH_TABLE" }
+  | { type: "RANDOM_EXPRESSION" };
 
 export interface ExpressionState {
   tokens: BooleanToken[];
@@ -82,6 +83,23 @@ export default function expressionReducer(state: ExpressionState, action: Expres
         ...state,
         context: newContext
       };
+    }
+    case "RANDOM_EXPRESSION": {
+      const expressionTokens = booleanEngine.generateRandomExpression();
+      const context: VariableContext = {};
+      expressionTokens.forEach(token => {
+        if (isVariable(token)) {
+          context[token] = false;
+        }
+      })
+
+      return {
+        tokens: expressionTokens,
+        context: context,
+        errorMsg: null,
+        evaluationResult: null,
+        truthTable: null
+      }
     }
     case "EVALUATE":
     case "GEN_TRUTH_TABLE":

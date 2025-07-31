@@ -55,7 +55,7 @@ describe("BooleanEvaluator", () => {
       true
     ]
   ])("should correctly evaluate simple expression", ([node, context, expectedValue]) => {
-    const ast: AST = { root: node as ASTNode, usedVariables: [] };
+    const ast: AST = { root: node as ASTNode, variables: [] };
     const evaluation = booleanEvaluator.evaluate(ast, context as VariableContext);
     expect(evaluation.result).toBe(expectedValue);
   });
@@ -94,7 +94,7 @@ describe("BooleanEvaluator", () => {
       true
     ]
   ])("should correctly evaluate complex expression", ([node, context, expectedValue]) => {
-    const ast: AST = { root: node as ASTNode, usedVariables: [] };
+    const ast: AST = { root: node as ASTNode, variables: [] };
     const evaluation = booleanEvaluator.evaluate(ast, context as VariableContext);
     expect(evaluation.result).toBe(expectedValue);
   });
@@ -102,7 +102,7 @@ describe("BooleanEvaluator", () => {
   test("should throw error when variable does not have a defined value", () => {
     const ast: AST = {
       root: { type: "Variable", value: "A" },
-      usedVariables: []
+      variables: []
     };
     const context: VariableContext = {}
 
@@ -119,7 +119,7 @@ describe("BooleanEvaluator", () => {
         operator: "UNKNOWN" as BinaryOperator,
         right: { type: "Variable", value: "A" }
       },
-      usedVariables: []
+      variables: []
     };
     const context: VariableContext = { "A": true };
 

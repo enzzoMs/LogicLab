@@ -1,7 +1,7 @@
 import {BooleanParser} from "@engine/parser/BooleanParser.ts";
 import {type AST, type BooleanToken} from "@engine/parser/AST.ts";
 import BooleanEvaluator, {type EvaluationResult, type VariableContext} from "@engine/evaluator/BooleanEvaluator.ts";
-import {generateTruthTableFromAst, type TruthTable} from "@engine/table-generator/TruthTableGenerator.ts";
+import {generateTruthTableFromAST, type TruthTable} from "@engine/table-generator/TruthTableGenerator.ts";
 
 /**
  * Handles boolean expressions processing, including parsing and evaluation.
@@ -46,6 +46,32 @@ export default class BooleanEngine {
       throw new Error("Expression must be parsed before generating truth table");
     }
 
-    return generateTruthTableFromAst(this.ast, this.evaluator);
+    return generateTruthTableFromAST(this.ast, this.evaluator);
+  }
+
+  generateRandomExpression(): BooleanToken[] {
+    const binaryOperators: BooleanToken[] = ["EQUIVALENCE", "IMPLICATION", "OR", "XOR", "NOR", "AND", "NAND"];
+    const primaryValues: BooleanToken[] = ["A", "B", "C", "D", "E", "F", "TRUE", "FALSE"];
+
+    const numOfTerms = Math.floor(Math.random() * 4) + 1;
+    const tokens: BooleanToken[] = [];
+
+    const NEGATION_CHANGE = 0.2;
+
+    for (let i = 0; i < numOfTerms; i++) {
+      if (Math.random() < NEGATION_CHANGE) {
+        tokens.push("NOT");
+      }
+      const primaryValueIndex = Math.floor(Math.random() * primaryValues.length);
+      const primaryValue = primaryValues[primaryValueIndex];
+      tokens.push(primaryValue);
+
+      if (i + 1 < numOfTerms) {
+        const randomOperatorIndex = Math.floor(Math.random() * binaryOperators.length);
+        const randomOperator = binaryOperators[randomOperatorIndex];
+        tokens.push(randomOperator);
+      }
+    }
+    return tokens;
   }
 }

@@ -1,5 +1,5 @@
 import {useReducer} from "react";
-import {Play, Table} from "lucide-react";
+import {Play, Shuffle, Table} from "lucide-react";
 import type {BooleanToken} from "@engine/parser/AST";
 import expressionReducer, {type ExpressionState} from "@components/editor/ExpressionReducer";
 import TokenGroup from "@components/editor/tokens/TokenGroup";
@@ -66,6 +66,9 @@ export default function BooleanEditor() {
           </button>
           <button className="btn-secondary" onClick={() => dispatch({ type: "GEN_TRUTH_TABLE" })}>
             <Table /> Truth Table
+          </button>
+          <button className="btn-secondary" onClick={() => dispatch({ type: "RANDOM_EXPRESSION" })}>
+            <Shuffle /> Random
           </button>
         </div>
       </div>

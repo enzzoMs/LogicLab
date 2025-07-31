@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import {generateTruthTableFromAst, TruthTableError} from "./TruthTableGenerator.ts";
+import {generateTruthTableFromAST, TruthTableError} from "./TruthTableGenerator.ts";
 import BooleanEvaluator from "../evaluator/BooleanEvaluator";
 import type { AST } from "../parser/AST";
 
@@ -9,10 +9,10 @@ describe("generateTruthTableFromAst", () => {
   it("should generate a truth table for an expression with one variable", () => {
     const ast: AST = {
       root: { type: "Variable", value: "A" },
-      usedVariables: ["A"]
+      variables: ["A"]
     };
 
-    const truthTable = generateTruthTableFromAst(ast, evaluator);
+    const truthTable = generateTruthTableFromAST(ast, evaluator);
 
     expect(truthTable.variables).toEqual(["A"]);
     expect(truthTable.rows).toEqual([
@@ -29,10 +29,10 @@ describe("generateTruthTableFromAst", () => {
         left: { type: "Variable", value: "A" },
         right: { type: "Variable", value: "B" },
       },
-      usedVariables: ["A", "B"]
+      variables: ["A", "B"]
     };
 
-    const truthTable = generateTruthTableFromAst(ast, evaluator);
+    const truthTable = generateTruthTableFromAST(ast, evaluator);
 
     expect(truthTable.variables).toEqual(["A", "B"]);
     expect(truthTable.rows).toEqual([
@@ -55,10 +55,10 @@ describe("generateTruthTableFromAst", () => {
           right: { type: "Variable", value: "B" },
         }
       },
-      usedVariables: ["A", "B"]
+      variables: ["A", "B"]
     };
 
-    const truthTable = generateTruthTableFromAst(ast, evaluator);
+    const truthTable = generateTruthTableFromAST(ast, evaluator);
 
     expect(truthTable.variables).toEqual(["A", "B"]);
     expect(truthTable.rows).toEqual([
@@ -77,19 +77,19 @@ describe("generateTruthTableFromAst", () => {
         left: { type: "Variable", value: "F" },
         right: { type: "Variable", value: "A" },
       },
-      usedVariables: ["F", "A"]
+      variables: ["F", "A"]
     };
 
-    const truthTable = generateTruthTableFromAst(ast, evaluator);
+    const truthTable = generateTruthTableFromAST(ast, evaluator);
 
     expect(truthTable.variables).toEqual(["A", "F"]);
     expect(truthTable.rows[0].variableValues).toHaveLength(2);
   });
 
   it("should throw error if the AST has no variables", () => {
-    const ast: AST = {root: {type: "Literal", value: false}, usedVariables: []};
+    const ast: AST = {root: {type: "Literal", value: false}, variables: []};
 
-    expect(() => generateTruthTableFromAst(ast, evaluator)).toThrowError(
+    expect(() => generateTruthTableFromAST(ast, evaluator)).toThrowError(
       new TruthTableError("Cannot generate a truth table from an expression with no variables")
     );
   })

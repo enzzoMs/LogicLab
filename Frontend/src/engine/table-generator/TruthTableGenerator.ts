@@ -15,15 +15,15 @@ export class TruthTableError extends Error {
   }
 }
 
-export function generateTruthTableFromAst(ast: AST, evaluator: BooleanEvaluator): TruthTable {
-  if (ast.usedVariables.length === 0) {
+export function generateTruthTableFromAST(ast: AST, evaluator: BooleanEvaluator): TruthTable {
+  if (ast.variables.length === 0) {
     throw new TruthTableError("Cannot generate a truth table from an expression with no variables");
   }
 
-  const variables = ast.usedVariables.sort();
+  const variables = ast.variables.sort();
   const truthTable: TruthTable = { variables, rows: [] };
 
-  const numOfRows = 2 ** ast.usedVariables.length;
+  const numOfRows = 2 ** ast.variables.length;
 
   for (let row = 0; row < numOfRows; row++) {
     const variableValues = row

@@ -64,7 +64,7 @@ export class BooleanParser {
       throw new ParsingError("Unexpected token", this.currentTokenIndex)
     }
 
-    return { root: rootNode, usedVariables: this.usedVariables };
+    return { root: rootNode, variables: this.usedVariables };
   }
 
   private currentToken(): BooleanToken {
