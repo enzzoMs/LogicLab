@@ -190,6 +190,10 @@ switch (lesson.data.difficulty) {
     display: inline;
   }
 
+  .lesson-wrapper pre {
+    background-color: transparent !important;
+  }
+
   .lesson-wrapper code {
     display: inline-block;
     font-size: var(--text-s);
@@ -197,6 +201,10 @@ switch (lesson.data.difficulty) {
     background-color: var(--color-surface-secondary);
     padding: 0.025em 0.3em;
     margin: 0 0.3em;
+  }
+
+  .lesson-wrapper code > span {
+    color: var(--color-text-body) !important;
   }
 
   .lesson-wrapper table {
