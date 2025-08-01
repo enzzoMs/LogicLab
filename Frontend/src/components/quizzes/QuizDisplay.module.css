@@ -1,0 +1,150 @@
+.quizWrapper {
+  width: 100%;
+  max-width: 55em;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-surface-primary);
+  padding: var(--space-m) var(--space-l);
+  box-shadow: 0 2px 8px #0000001a;
+  margin: var(--space-l) auto;
+}
+
+.quizHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-s);
+  margin-bottom: var(--space-s);
+}
+
+.quizHeader h1 {
+  flex: 1;
+  font-size: var(--text-l);
+  margin: 0;
+}
+
+.quizDuration {
+  display: flex;
+  align-items: center;
+  font-size: var(--text-s);
+  gap: var(--space-3xs);
+}
+
+.quizDuration svg {
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.quizProgressHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-s);
+}
+
+.progressBarTrack {
+  height: var(--space-2xs);
+  background-color: rgba(0, 0, 0, 0.1);
+  margin: var(--space-2xs) 0;
+}
+
+.progressBarValue {
+  height: 100%;
+  background-color: var(--color-primary);
+}
+
+.questionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-s);
+  margin-top: var(--space-s);
+  padding-top: var(--space-m);
+  border-top: var(--border-thickness) solid var(--border-color);;
+}
+
+.questionContainer h2 {
+  font-size: var(--text-m);
+  font-weight: var(--weight-semibold);
+}
+
+.option,
+.selectedOption {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: var(--weight-regular);
+  text-align: start;
+  cursor: pointer;
+  background-color: transparent;
+  border: 2px solid var(--border-color);
+  padding: var(--space-s);
+  transition: all 0.2s ease-in-out;
+}
+
+.option:hover {
+  border-color: #b5bbc5;
+}
+
+.optionIndicator {
+  display: inline-block;
+  width: var(--space-s);
+  height: var(--space-s);
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+}
+
+.selectedOption {
+  border-color: var(--color-primary);
+  background-color: rgba(var(--color-primary-rgb), 0.08);
+}
+
+.selectedOption .optionIndicator {
+  border-color: var(--color-primary);
+  border-width: 4px;
+}
+
+.questionButton {
+  margin-top: var(--space-s);
+  align-self: flex-end;
+}
+
+.endGameContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-s);
+  text-align: center;
+}
+
+.endGameContainer svg {
+  display: block;
+  align-self: center;
+  width: 4rem;
+  height: 4rem;
+  color: var(--color-primary);
+}
+
+.endGameContainer h1 {
+  font-size: var(--text-xl);
+  margin: 0;
+}
+
+.endGameContainer p {
+  font-size: var(--text-m);
+  margin: 0;
+}
+
+p.endScorePercentage {
+  color: var(--color-primary);
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-semibold);
+  line-height: 1;
+}
+
+.endGameButtonsContainer {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-s);
+  margin-top: var(--space-s);
+}

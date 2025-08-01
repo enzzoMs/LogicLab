@@ -1,0 +1,79 @@
+{
+  "title": "Standard Forms — SOP and POS",
+  "description": "Assess your understanding of the standard forms used to express Boolean logic: Sum of Products (SOP) and Product of Sums (POS).",
+  "minutesDuration": 15,
+  "difficulty": "Intermediate",
+  "order": 8,
+  "questions": [
+    {
+      "question": "What does SOP stand for in Boolean algebra?",
+      "options": [
+        "Sum of Parameters",
+        "Set of Products",
+        "Sum of Products",
+        "Sequence of Processes"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "What is the general structure of a SOP expression?",
+      "options": [
+        "AND terms added together",
+        "OR terms multiplied together",
+        "Only NOT operations",
+        "A combination of NOT and XOR"
+      ],
+      "correctOption": 0
+    },
+    {
+      "question": "Which of the following is a valid SOP expression?",
+      "options": [
+        "(A + B)(C + D)",
+        "A + B + C",
+        "A·B + C·D",
+        "(A · B) + (¬C · D)"
+      ],
+      "correctOption": 3
+    },
+    {
+      "question": "What does POS stand for?",
+      "options": [
+        "Product of Sums",
+        "Position of Signals",
+        "Power of States",
+        "Process of Simplification"
+      ],
+      "correctOption": 0
+    },
+    {
+      "question": "Which of the following is a valid POS expression?",
+      "options": [
+        "(A + B)(¬C + D)",
+        "A·B + C·D",
+        "(A · B) + (C · D)",
+        "¬A · B + C"
+      ],
+      "correctOption": 0
+    },
+    {
+      "question": "Which form is typically easier to implement using AND-OR logic gate combinations?",
+      "options": [
+        "POS",
+        "SOP",
+        "NAND-only",
+        "XOR-only"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "What do SOP and POS forms have in common?",
+      "options": [
+        "They are only used for analog circuits",
+        "They both represent ways to write Boolean expressions in standardized, canonical forms",
+        "They don’t use AND or OR operations",
+        "They are exclusive to binary addition"
+      ],
+      "correctOption": 1
+    }
+  ]
+}

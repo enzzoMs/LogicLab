@@ -1,0 +1,79 @@
+{
+  "title": "Simplifying Boolean Expressions",
+  "description": "Test your ability to apply Boolean laws and identities to simplify logic expressions efficiently.",
+  "minutesDuration": 12,
+  "difficulty": "Intermediate",
+  "order": 7,
+  "questions": [
+    {
+      "question": "What is the main goal of simplifying Boolean expressions?",
+      "options": [
+        "To make the expressions longer and more detailed",
+        "To reduce the number of logic gates needed in a circuit",
+        "To change the logic output",
+        "To convert them to decimal form"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Which law allows you to simplify A + A·B into A?",
+      "options": [
+        "Distributive Law",
+        "Absorption Law",
+        "Demonstration Law",
+        "Inverse Law"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "What does A · A simplify to?",
+      "options": [
+        "0",
+        "A",
+        "1",
+        "A'"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "What is the simplified form of A + A'·B?",
+      "options": [
+        "A + B",
+        "1",
+        "A + B'",
+        "A + B'"
+      ],
+      "correctOption": 0
+    },
+    {
+      "question": "Which of the following expressions is equivalent to A + A'?",
+      "options": [
+        "0",
+        "1",
+        "A",
+        "A'"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Which technique is commonly used to simplify expressions manually?",
+      "options": [
+        "Applying De Morgan’s Laws only",
+        "Guesswork",
+        "Using truth tables or Boolean identities",
+        "Rewriting all variables in binary"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "What does the expression A·1 simplify to?",
+      "options": [
+        "1",
+        "A",
+        "0",
+        "A'"
+      ],
+      "correctOption": 1
+    }
+  ]
+}

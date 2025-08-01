@@ -1,0 +1,69 @@
+{
+  "title": "Understanding De Morgan’s Laws",
+  "description": "Evaluate your understanding of De Morgan's Laws and how they are used to transform and simplify Boolean expressions.",
+  "minutesDuration": 10,
+  "difficulty": "Intermediate",
+  "order": 6,
+  "questions": [
+    {
+      "question": "What is the first De Morgan’s Law?",
+      "options": [
+        "¬(A + B) = ¬A + ¬B",
+        "¬(A · B) = ¬A · ¬B",
+        "¬(A + B) = ¬A · ¬B",
+        "¬(A · B) = A + B"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "What is the second De Morgan’s Law?",
+      "options": [
+        "¬(A + B) = A · B",
+        "¬(A · B) = ¬A + ¬B",
+        "¬(A + B) = ¬A · B",
+        "¬(A · B) = ¬A · B"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Which of the following is equivalent to ¬(X + Y) using De Morgan’s Law?",
+      "options": [
+        "¬X · ¬Y",
+        "¬X + Y",
+        "X · Y",
+        "¬X + ¬Y"
+      ],
+      "correctOption": 0
+    },
+    {
+      "question": "Why are De Morgan’s Laws useful in Boolean algebra?",
+      "options": [
+        "They make expressions harder to evaluate",
+        "They eliminate the need for logic gates",
+        "They help transform expressions into simpler or alternate forms",
+        "They replace AND and OR with multiplication and division"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "Apply De Morgan’s Law: What is the equivalent of ¬(A · ¬B)?",
+      "options": [
+        "¬A + ¬B",
+        "¬A · B",
+        "¬A + B",
+        "A + B"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "Which logic gate's output mimics the first De Morgan's law?",
+      "options": [
+        "AND",
+        "OR",
+        "NOR",
+        "NAND"
+      ],
+      "correctOption": 2
+    }
+  ]
+}

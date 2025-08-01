@@ -2,7 +2,8 @@
 import {getCollection} from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import LessonCard from "@components/lessons/LessonCard.astro";
-import Card from "../components/shared/Card.astro";
+import Card from "@components/shared/Card.astro";
+import QuickTools from "@components/shared/QuickTools.astro";
 
 const lessons = await getCollection("lessons");
 ---
@@ -19,7 +20,7 @@ const lessons = await getCollection("lessons");
             description={lesson.data.description}
             duration={lesson.data.minutesDuration}
             difficulty={lesson.data.difficulty}
-            lessonName={lesson.id}/>
+            lessonId={lesson.id}/>
         ))}
       </div>
       <aside>
@@ -34,12 +35,7 @@ const lessons = await getCollection("lessons");
             <span class="advanced-step"></span>Advanced Topics
           </p>
         </Card>
-        <Card title="Quick Tools">
-          <a href="/editor" class="btn-outline btn-small">Expression Editor</a>
-          <a href="/editor" class="btn-outline btn-small">Truth Tables</a>
-          <a href="/editor" class="btn-outline btn-small">K-Maps</a>
-          <a href="/quizzes" class="btn-outline btn-small">Quizzes</a>
-        </Card>
+        <QuickTools />
       </aside>
     </div>
   </section>

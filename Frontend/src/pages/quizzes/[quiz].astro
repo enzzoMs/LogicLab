@@ -1,0 +1,23 @@
+---
+import {getCollection} from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import QuizDisplay from "@components/quizzes/QuizDisplay";
+
+export async function getStaticPaths() {
+  const quizzes = await getCollection("quizzes");
+  return quizzes.map(quiz => ({
+    params: { quiz: quiz.id },
+    props: { quiz }
+  }));
+}
+
+const { quiz } = Astro.props;
+---
+
+<PageLayout page="quizzes" pageTitle={quiz.data.title}>
+  <QuizDisplay
+    client:load
+    title={quiz.data.title}
+    minutesDuration={quiz.data.minutesDuration}
+    questions={quiz.data.questions}/>
+</PageLayout>

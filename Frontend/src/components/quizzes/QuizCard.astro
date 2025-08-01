@@ -1,16 +1,24 @@
 ---
 import Card from "@components/shared/Card.astro";
-import { ArrowRight, BookOpen, Clock } from "@lucide/astro";
+import { ArrowRight, Clock, Target } from "@lucide/astro";
 
 interface Props {
   title: string;
   description: string;
   duration: number;
+  numOfQuestions: number;
   difficulty: "Beginner" | "Intermediate" | "Advanced";
-  lessonId: string;
+  quizId: string;
 }
 
-const { title, description, duration, difficulty, lessonId } = Astro.props;
+const {
+  title,
+  description,
+  duration,
+  difficulty,
+  numOfQuestions,
+  quizId
+} = Astro.props;
 
 let badgeStyle: string;
 
@@ -28,16 +36,19 @@ switch (difficulty) {
 ---
 
 <article>
-  <Card title={title} icon={BookOpen}>
-    <div class="lesson">
-      <div class="lesson-header">
+  <Card title={title}>
+    <div class="quiz">
+      <div class="quiz-header">
         <p class={`badge-${badgeStyle}`}>{difficulty}</p>
-        <div class="lesson-duration">
+        <div class="quiz-num-questions">
+          <Target /> <p>{numOfQuestions} questions</p>
+        </div>
+        <div class="quiz-duration">
           <Clock /> <p>{duration} min</p>
         </div>
       </div>
       <p>{description}</p>
-      <a href={`/lessons/${lessonId}`} class="btn-primary btn-small">
+      <a href={`/quizzes/${quizId}`} class="btn-primary btn-small">
         Start <ArrowRight />
       </a>
     </div>
@@ -49,7 +60,7 @@ switch (difficulty) {
     height: 100%;
   }
 
-  .lesson {
+  .quiz {
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -58,24 +69,26 @@ switch (difficulty) {
     gap: var(--space-xs);
   }
 
-  .lesson-header {
+  .quiz-header {
     display: flex;
-    gap: var(--space-xs);
+    gap: var(--space-s);
   }
 
-  .lesson-duration {
+  .quiz-duration,
+  .quiz-num-questions {
     display: flex;
     align-items: center;
     font-size: var(--text-s);
-    gap: var(--space-2xs);
+    gap: var(--space-3xs);
   }
 
-  .lesson-duration svg {
+  .quiz-duration svg ,
+  .quiz-num-questions svg {
     width: 1.25em;
     height: 1.25em;
   }
 
-  .lesson > p {
+  .quiz > p {
     flex: 1;
   }
 

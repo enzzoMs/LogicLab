@@ -1,0 +1,79 @@
+{
+  "title": "Introduction to Boolean Algebra",
+  "description": "Test your understanding of the fundamental concepts introduced in Lesson 1, including the basics and history of Boolean Algebra.",
+  "minutesDuration": 10,
+  "difficulty": "Beginner",
+  "order": 1,
+  "questions": [
+    {
+      "question": "What is Boolean algebra primarily concerned with?",
+      "options": [
+        "Arithmetic calculations using real numbers",
+        "Operations on logical values true and false",
+        "Solving polynomial equations",
+        "Graphical representations of functions"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Who is credited with founding Boolean algebra?",
+      "options": [
+        "Isaac Newton",
+        "George Boole",
+        "Alan Turing",
+        "Kurt Gödel"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Which of the following is NOT a Boolean value?",
+      "options": [
+        "True",
+        "False",
+        "Maybe",
+        "0"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "Boolean algebra is essential for which field?",
+      "options": [
+        "Digital electronics",
+        "Organic chemistry",
+        "Classical mechanics",
+        "Art history"
+      ],
+      "correctOption": 0
+    },
+    {
+      "question": "In Boolean algebra, what are the only possible values for a variable?",
+      "options": [
+        "Any integer value",
+        "True and False",
+        "Positive and negative numbers",
+        "Real numbers"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Boolean algebra was first introduced in the 19th century by George Boole in his book titled:",
+      "options": [
+        "Principia Mathematica",
+        "An Investigation of the Laws of Thought",
+        "The Elements",
+        "On Computable Numbers"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Which of the following is an application of Boolean algebra?",
+      "options": [
+        "Designing logic circuits",
+        "Predicting weather patterns",
+        "Writing novels",
+        "Painting landscapes"
+      ],
+      "correctOption": 0
+    }
+  ]
+}

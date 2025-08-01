@@ -1,0 +1,89 @@
+{
+  "title": "Basic Logic Operations — AND, OR, NOT",
+  "description": "Test your understanding of the three fundamental logic operations: AND, OR, and NOT.",
+  "minutesDuration": 10,
+  "difficulty": "Beginner",
+  "order": 3,
+  "questions": [
+    {
+      "question": "What is the output of the expression: 1 AND 1?",
+      "options": [
+        "0",
+        "1",
+        "Undefined",
+        "Error"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "What does the OR operation return when both inputs are 0?",
+      "options": [
+        "1",
+        "0",
+        "True",
+        "It depends on the variable names"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Which logic operation inverts the input value?",
+      "options": [
+        "AND",
+        "OR",
+        "XOR",
+        "NOT"
+      ],
+      "correctOption": 3
+    },
+    {
+      "question": "What is the output of the expression: NOT(1)?",
+      "options": [
+        "1",
+        "0",
+        "Undefined",
+        "It depends on the context"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Which of the following is true for the AND operation?",
+      "options": [
+        "Returns 1 if at least one input is 1",
+        "Returns 1 only if all inputs are 1",
+        "Returns the opposite of the input",
+        "Returns 0 only if all inputs are 1"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Which Boolean expression represents the OR operation?",
+      "options": [
+        "A · B",
+        "A + B",
+        "¬A",
+        "A → B"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Which truth table result is correct for A = 0 and B = 1 using the AND operation?",
+      "options": [
+        "1",
+        "0",
+        "True",
+        "Undefined"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Which of the following operations is considered unary?",
+      "options": [
+        "AND",
+        "OR",
+        "NOT",
+        "XOR"
+      ],
+      "correctOption": 2
+    }
+  ]
+}

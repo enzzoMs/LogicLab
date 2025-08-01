@@ -3,6 +3,7 @@ import {getCollection, render} from "astro:content";
 import {BookOpen, Clock} from "@lucide/astro";
 import PageLayout from "@layouts/PageLayout.astro";
 import Card from "@components/shared/Card.astro";
+import QuickTools from "@components/shared/QuickTools.astro";
 
 export async function getStaticPaths() {
   const lessons = await getCollection("lessons");
@@ -53,12 +54,7 @@ switch (lesson.data.difficulty) {
           .map(h => (<a href={`#${h.slug}`} class="btn-outline btn-small">{h.text}</a>))
         }
       </Card>
-      <Card title="Quick Tools">
-        <a href="/editor" class="btn-outline btn-small">Expression Editor</a>
-        <a href="/editor" class="btn-outline btn-small">Truth Tables</a>
-        <a href="/editor" class="btn-outline btn-small">K-Maps</a>
-        <a href="/quizzes" class="btn-outline btn-small">Quizzes</a>
-      </Card>
+      <QuickTools />
     </aside>
   </article>
 </PageLayout>

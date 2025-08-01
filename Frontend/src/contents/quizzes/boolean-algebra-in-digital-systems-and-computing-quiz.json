@@ -1,0 +1,89 @@
+{
+  "title": "Boolean Algebra in Digital Systems and Computing",
+  "description": "Evaluate your understanding of how Boolean algebra is applied in real-world digital systems, hardware, software, and programming logic.",
+  "minutesDuration": 12,
+  "difficulty": "Advanced",
+  "order": 9,
+  "questions": [
+    {
+      "question": "What is the main role of Boolean algebra in digital systems?",
+      "options": [
+        "Generating random data",
+        "Controlling color schemes",
+        "Managing binary logic and signal processing",
+        "Encrypting passwords"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "Which hardware component uses Boolean logic to perform arithmetic and decision-making?",
+      "options": [
+        "Power supply",
+        "CPU (Central Processing Unit)",
+        "Cooling fan",
+        "Monitor"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "Which of the following is a key application of Boolean logic in software programming?",
+      "options": [
+        "Adjusting image brightness",
+        "Controlling logical flow with conditionals",
+        "Drawing 3D graphics",
+        "Saving files in binary"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "What does a logic simulator like Logisim allow users to do?",
+      "options": [
+        "Edit video files",
+        "Run operating systems",
+        "Design and test digital circuits using Boolean gates",
+        "Access cloud storage"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "In programming, what does the expression `(a && b)` represent?",
+      "options": [
+        "Addition of a and b",
+        "Logical OR",
+        "Logical AND",
+        "Boolean NOT"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "Which type of chip allows users to configure logic using Boolean expressions?",
+      "options": [
+        "FPGA",
+        "RAM",
+        "GPU",
+        "SSD"
+      ],
+      "correctOption": 0
+    },
+    {
+      "question": "Which hardware description language is commonly used to express Boolean logic for circuit design?",
+      "options": [
+        "Python",
+        "VHDL",
+        "C++",
+        "HTML"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "What kind of logic operation would a firewall most likely use?",
+      "options": [
+        "Artistic filtering",
+        "Boolean condition checking (e.g., source AND port)",
+        "Graph rendering",
+        "Matrix inversion"
+      ],
+      "correctOption": 1
+    }
+  ]
+}

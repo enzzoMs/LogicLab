@@ -1,0 +1,89 @@
+{
+  "title": "Laws and Properties of Boolean Algebra",
+  "description": "Test your knowledge of the fundamental laws and identities that govern Boolean algebra, including identity, null, idempotent, and distributive laws.",
+  "minutesDuration": 12,
+  "difficulty": "Beginner",
+  "order": 5,
+  "questions": [
+    {
+      "question": "What does the Identity Law state in Boolean algebra?",
+      "options": [
+        "A + 0 = A and A · 1 = A",
+        "A + A = 0 and A · A = 1",
+        "A + 1 = 1 and A · 0 = 0",
+        "A + B = B + A"
+      ],
+      "correctOption": 0
+    },
+    {
+      "question": "Which law is illustrated by: A + A = A?",
+      "options": [
+        "Null Law",
+        "Idempotent Law",
+        "Absorption Law",
+        "Distributive Law"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "According to the Complement Law, what is A + A' equal to?",
+      "options": [
+        "A",
+        "0",
+        "1",
+        "A'"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "Which Boolean identity is described by: A + AB = A?",
+      "options": [
+        "Distributive Law",
+        "Demonstrative Law",
+        "Absorption Law",
+        "Involution Law"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "What does the Distributive Law in Boolean algebra allow you to do?",
+      "options": [
+        "Distribute AND over OR or vice versa",
+        "Remove all complements",
+        "Convert decimal to binary",
+        "Ignore parentheses"
+      ],
+      "correctOption": 0
+    },
+    {
+      "question": "Which of the following shows the Commutative Law?",
+      "options": [
+        "A + B = B + A",
+        "A · (B + C) = AB + AC",
+        "A · A = A",
+        "A + 1 = 1"
+      ],
+      "correctOption": 0
+    },
+    {
+      "question": "What does the Null Law state?",
+      "options": [
+        "A + A = 0 and A · A = 1",
+        "A + 0 = A and A · 1 = A",
+        "A + 1 = 1 and A · 0 = 0",
+        "A · A' = 1"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "Which of these expressions is always equal to 0?",
+      "options": [
+        "A + A'",
+        "A · A'",
+        "A + 0",
+        "A · 1"
+      ],
+      "correctOption": 1
+    }
+  ]
+}

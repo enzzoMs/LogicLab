@@ -55,6 +55,11 @@
   outline-offset: 2px;
 }
 
+.btn-primary:disabled {
+  cursor: not-allowed;
+  background-color: rgba(var(--color-primary-rgb), 0.5);
+}
+
 /* -------------------------------------------- */
 
 .btn-outline {

@@ -1,0 +1,89 @@
+---
+import {getCollection} from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import QuickTools from "@components/shared/QuickTools.astro";
+import QuizCard from "@components/quizzes/QuizCard.astro";
+
+const quizzes = await getCollection("quizzes");
+---
+
+<PageLayout page="quizzes" pageTitle="Quizzes">
+  <section>
+    <h1>Practice Quizzes</h1>
+    <p>Test your knowledge and reinforce your learning with interactive quizzes.</p>
+      <div class="quizzes-wrapper">
+        <div class="quizzes-list">
+          {quizzes.sort((a, b) => a.data.order - b.data.order).map(quiz => (
+            <QuizCard
+              title={quiz.data.title}
+              description={quiz.data.description}
+              duration={quiz.data.minutesDuration}
+              difficulty={quiz.data.difficulty}
+              numOfQuestions={quiz.data.questions.length}
+              quizId={quiz.id}/>
+          ))}
+          </div>
+          <aside>
+            <QuickTools />
+          </aside>
+      </div>
+  </section>
+</PageLayout>
+
+<style>
+  section {
+    padding: var(--space-l) var(--space-2xl);
+    background-color: var(--color-background);
+  }
+
+  section > h1 {
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-xs);
+  }
+
+  section > p {
+    font-size: var(--text-m);
+    margin-bottom: var(--space-l);
+  }
+
+  .quizzes-wrapper {
+    display: flex;
+    gap: var(--space-m);
+  }
+
+  aside {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+  }
+
+  .quizzes-list {
+    flex: 2.5;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-m);
+  }
+
+  @media (max-width: 1024px) {
+    .quizzes-wrapper {
+      flex-direction: column;
+    }
+
+    aside {
+      order: -1;
+      flex-direction: row;
+      align-content: stretch;
+    }
+
+    aside > :global(*) {
+      flex: 1;
+    }
+  }
+
+  @media (max-width: 640px) {
+    aside {
+      flex-direction: column;
+    }
+  }
+</style>

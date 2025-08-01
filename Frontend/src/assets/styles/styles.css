@@ -26,6 +26,7 @@ body {
   /* COLORS ========== */
 
   --color-primary: #027e97;
+  --color-primary-rgb: 2, 126, 151;
   --color-on-primary: #ffffff;
   --color-primary-dark: #036b80;
   --color-primary-extra-dark: #111827;

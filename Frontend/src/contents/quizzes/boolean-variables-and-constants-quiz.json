@@ -1,0 +1,69 @@
+{
+  "title": "Boolean Variables and Constants",
+  "description": "Assess your knowledge of Boolean variables, constants, and how they behave in logical systems.",
+  "minutesDuration": 8,
+  "difficulty": "Beginner",
+  "order": 2,
+  "questions": [
+    {
+      "question": "What are the two Boolean constants?",
+      "options": [
+        "1 and 2",
+        "A and B",
+        "True and False",
+        "AND and OR"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "In Boolean logic, what does the constant '0' represent?",
+      "options": [
+        "A true value",
+        "An error state",
+        "A floating-point number",
+        "False"
+      ],
+      "correctOption": 3
+    },
+    {
+      "question": "Which of the following is a conventional Boolean variable name?",
+      "options": [
+        "42",
+        "x",
+        "3.14",
+        "@flag"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "What is the main purpose of a Boolean variable?",
+      "options": [
+        "To store decimal numbers",
+        "To represent binary logic states: true or false",
+        "To hold multiple values",
+        "To describe floating-point arithmetic"
+      ],
+      "correctOption": 1
+    },
+    {
+      "question": "What happens when a Boolean variable is assigned the value of 1?",
+      "options": [
+        "It is set to false",
+        "It is set to undefined",
+        "It is set to true",
+        "It becomes an integer"
+      ],
+      "correctOption": 2
+    },
+    {
+      "question": "Which of the following best describes the difference between Boolean constants and variables?",
+      "options": [
+        "Constants can only be 0 or 1; variables can represent those values and change over time.",
+        "Variables are always true; constants are always false.",
+        "Variables are numbers; constants are logic gates.",
+        "There is no difference between them."
+      ],
+      "correctOption": 0
+    }
+  ]
+}
