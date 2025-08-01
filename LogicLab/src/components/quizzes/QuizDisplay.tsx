@@ -134,7 +134,7 @@ function QuizEndGame({ questions, userAnswers, onRestartQuiz }: QuizEndGameProps
       <p>You got {correctAnswers} out of {questions.length} questions correct.</p>
       <div className={styles.endGameButtonsContainer}>
         <button className="btn-primary" onClick={onRestartQuiz}>Try Again</button>
-        <a href="/quizzes" className="btn-outline">Back to Quizzes</a>
+        <a href="/LogicLab/quizzes" className="btn-outline">Back to Quizzes</a>
       </div>
     </div>
   )

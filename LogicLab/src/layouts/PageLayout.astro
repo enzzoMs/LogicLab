@@ -3,6 +3,7 @@ import Header from "@components/shared/Header.astro";
 import Footer from "@components/shared/Footer.astro";
 import type {AppPage} from "@components/shared/Header.astro";
 import appLogo from "@assets/icons/app-logo.svg?url";
+import styles from "@assets/styles/styles.css?url";
 
 interface Props {
   page: AppPage;
@@ -18,7 +19,7 @@ const { page, pageTitle } = Astro.props;
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href={appLogo} />
-    <link rel="stylesheet" href="/src/assets/styles/styles.css" />
+    <link rel="stylesheet" href={styles} />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content=" A interactive platform for learning and experimenting with boolean expressions, truth tables and logical reasoning.">
     <title>{`${pageTitle} - LogicLab`}</title>

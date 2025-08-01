@@ -11,10 +11,10 @@ interface Props {
 const { currentPage } = Astro.props;
 
 const navLinks: { page: AppPage, path: string, label: string }[] = [
-  { page: "home", path: "/", label: "Home" },
-  { page: "editor", path: "/editor", label: "Editor" },
-  { page: "lessons", path: "/lessons", label: "Lessons" },
-  { page: "quizzes", path: "/quizzes", label: "Quizzes" }
+  { page: "home", path: "/LogicLab/", label: "Home" },
+  { page: "editor", path: "/LogicLab/editor", label: "Editor" },
+  { page: "lessons", path: "/LogicLab/lessons", label: "Lessons" },
+  { page: "quizzes", path: "/LogicLab/quizzes", label: "Quizzes" }
 ]
 ---
 
@@ -34,8 +34,8 @@ const navLinks: { page: AppPage, path: string, label: string }[] = [
       ))}
     </nav>
     <div class="btns-container">
-      <a href="/quizzes" class="btn-outline btn-small">Take Quiz</a>
-      <a href="/lessons" class="btn-primary btn-small">Get Started</a>
+      <a href="/LogicLab/quizzes" class="btn-outline btn-small">Take Quiz</a>
+      <a href="/LogicLab/lessons" class="btn-primary btn-small">Get Started</a>
     </div>
     <button id="menu-btn" title="Toggle navigation menu" class="btn-ghost">
       <span class="active-icon"><Menu /></span>
