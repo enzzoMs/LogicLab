@@ -2,7 +2,7 @@
 import { Menu, X } from "@lucide/astro";
 import appLogo from "@assets/icons/app-logo.svg?url";
 
-export type AppPage = "home" | "editor" | "lessons" | "quizzes" | "about";
+export type AppPage = "home" | "editor" | "lessons" | "quizzes" | "about" | "notFound";
 
 interface Props {
   currentPage: AppPage;
@@ -10,7 +10,7 @@ interface Props {
 
 const { currentPage } = Astro.props;
 
-const navLinks: {page: AppPage, path: string, label: string }[] = [
+const navLinks: { page: AppPage, path: string, label: string }[] = [
   { page: "home", path: "/", label: "Home" },
   { page: "editor", path: "/editor", label: "Editor" },
   { page: "lessons", path: "/lessons", label: "Lessons" },
